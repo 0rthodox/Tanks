@@ -1,0 +1,12 @@
+# depslib dependency file v1.0
+1557002162 source:c:\dev\tanks\main.cpp
+	"windows.h"
+
+1557001419 c:\dev\tanks\windows.h
+	<SFML/Graphics.hpp>
+	<iostream>
+	<vector>
+
+1557002327 source:c:\dev\tanks\windows.cpp
+	"windows.h"
+
