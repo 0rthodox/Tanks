@@ -1,9 +1,8 @@
 #ifndef WINDOWS_H
 #define WINDOWS_H
 
-#include <SFML/Graphics.hpp>
+#include "Entity.h"
 #include <iostream>
-#include <vector>
 
 extern int scale;
 

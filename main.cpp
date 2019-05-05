@@ -1,4 +1,5 @@
 #include "windows.h"
+#include "Entity.h"
 
 int scale = 40;
 

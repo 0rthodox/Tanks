@@ -15,7 +15,6 @@ bool init_window::work() {
             while(wind_.pollEvent(event)) {
                 if(event.type == sf::Event::Closed) {
                     wind_.close();
-                    return false;
                 }
                 else if(event.type == sf::Event::MouseButtonPressed) {
                     wind_.close();
@@ -29,6 +28,8 @@ bool init_window::work() {
 
             wind_.display();
         }
+
+        return false;
 }
 
 init_window::init_window() {
@@ -62,7 +63,6 @@ bool main_window::work() {
             while(wind_.pollEvent(event)) {
                 if(event.type == sf::Event::Closed) {
                     wind_.close();
-                    return false;
                 }
                 else if(event.type == sf::Event::MouseButtonPressed) {
                     wind_.close();
@@ -86,5 +86,7 @@ bool main_window::work() {
 
             wind_.display();
         }
+
+        return false;
 
 }
