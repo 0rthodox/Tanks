@@ -4,7 +4,7 @@ wind::wind() {}
 
 bool init_window::work() {
 
-        wind_.create(sf::VideoMode(640, 360), "TANKS");
+        wind_.create(sf::VideoMode(960, 540), "TANKS");
 
         main_sprite_.scale(scale, scale);
 
@@ -32,10 +32,9 @@ bool init_window::work() {
         return false;
 }
 
-init_window::init_window() {
+init_window::init_window() : provider_(&T, 0){
 
-    main_texture_.loadFromFile("main_init.png");
-    main_sprite_ = sf::Sprite(main_texture_);
+    main_sprite_.setTexture(provider_.get_texture());
     main_sprite_.setScale(1 / 120., 1 / 120.);
 
 }
@@ -54,7 +53,7 @@ main_window::main_window() {
 
 bool main_window::work() {
 
-    wind_.create(sf::VideoMode(640, 360), "TANKS");
+    wind_.create(sf::VideoMode(960, 540), "TANKS");
 
         while(wind_.isOpen()) {
 

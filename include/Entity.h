@@ -1,46 +1,57 @@
 #ifndef ENTITY_H
 #define ENTITY_H
 
-
+#include <list>
 #include "support.h"
 
+extern texture_keeper T;
 
 class Entity {
 
 public:
 
-    Entity(sf::Texture & texture, float w, float h, unsigned short direction);
+    Entity();
+
+    Entity(unsigned short texture_number, float w, float h, unsigned short direction, unsigned short speed);
 
     void set_direction(unsigned short new_direction);
 
-    void draw(sf::RenderWindow & window);
+    void set_speed(unsigned short new_speed);
+
+    void set_sprite();
+
+    void adjust_provider(texture_keeper * keeper, unsigned short number);
+
+    sf::Sprite get_sprite();
+
+    void set_size_of_sprite(float w, float h);
 
 protected:
 
     float w_;
     float h_;
 
-
     sf::Sprite spr_;
 
     unsigned short direction_;
+
+    unsigned short speed_;
+
+    texture_manager provider_;
 
 };
 
 class projectile : public Entity {
 
-    short speed_;
-
 public:
 
-    projectile(sf::Texture & texture, float w, float h, unsigned short direction, short speed) :
-        Entity(texture, w, h, direction), speed_(speed) {}
+    projectile();
 
 };
 
 class tank : public Entity {
 
-    std::vector<projectile> ammo_;
+    std::list<projectile> ammo_;
 
 public:
 

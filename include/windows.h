@@ -2,7 +2,6 @@
 #define WINDOWS_H
 
 #include "Entity.h"
-#include <iostream>
 
 extern int scale;
 
@@ -20,8 +19,7 @@ public:
 };
 
 class init_window : public wind {
-
-    sf::Texture main_texture_;
+    texture_manager provider_;
     sf::Sprite main_sprite_;
 
 public:

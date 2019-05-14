@@ -1,15 +1,14 @@
 #include "windows.h"
 #include "Entity.h"
 
-int scale = 40;
+int scale = 60;
+
+texture_keeper T(2);
 
 int main() {
 
-    init_window w1;
-    if(w1.work()) {
-        main_window mw;
-        mw.work();
-    }
+    init_window iw;
+    iw.work();
 
     return 0;
 
