@@ -65,8 +65,6 @@ bool main_window::work() {
                     wind_.close();
                 }
                 else if(event.type == sf::Event::MouseButtonPressed) {
-                    wind_.close();
-                    return true;
                 }
             }
 

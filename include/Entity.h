@@ -1,9 +1,8 @@
 #ifndef ENTITY_H
 #define ENTITY_H
 
-#include <string>
-#include <vector>
-#include <SFML/Graphics.hpp>
+
+#include "support.h"
 
 
 class Entity {
@@ -14,7 +13,7 @@ public:
 
     void set_direction(unsigned short new_direction);
 
-    void draw(sf::RenderWindow window);
+    void draw(sf::RenderWindow & window);
 
 protected:
 

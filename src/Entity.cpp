@@ -22,6 +22,6 @@ void tank::load_ammo(projectile prj, short amount) {
 
 }
 
-void Entity::draw(sf::RenderWindow window) {
-    window.draw(spr.)
+void Entity::draw(sf::RenderWindow & window) {
+    window.draw(spr_);
 }

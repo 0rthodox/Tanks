@@ -11,15 +11,24 @@
 1557002327 source:c:\dev\tanks\windows.cpp
 	"windows.h"
 
-1557058282 c:\dev\tanks\include\windows.h
+1557832392 c:\dev\tanks\include\windows.h
 	"Entity.h"
 	<iostream>
 
-1557058331 c:\dev\tanks\include\entity.h
+1557833136 c:\dev\tanks\include\entity.h
+	"support.h"
+
+1557832618 source:c:\dev\tanks\src\windows.cpp
+	"windows.h"
+
+1557833852 c:\dev\tanks\include\support.h
 	<string>
 	<vector>
 	<SFML/Graphics.hpp>
 
-1557056308 source:c:\dev\tanks\src\windows.cpp
-	"windows.h"
+1557832618 source:c:\dev\tanks\src\entity.cpp
+	"Entity.h"
+
+1557833850 source:c:\dev\tanks\src\support.cpp
+	"support.h"
 

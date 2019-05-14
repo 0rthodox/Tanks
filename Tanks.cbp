@@ -34,9 +34,11 @@
 			<Add option="-Wall" />
 		</Compiler>
 		<Unit filename="include/Entity.h" />
+		<Unit filename="include/support.h" />
 		<Unit filename="include/windows.h" />
 		<Unit filename="main.cpp" />
 		<Unit filename="src/Entity.cpp" />
+		<Unit filename="src/support.cpp" />
 		<Unit filename="src/windows.cpp" />
 		<Extensions>
 			<code_completion />
