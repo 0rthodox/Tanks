@@ -67,6 +67,18 @@ bool main_window::work() {
                 }
                 else if(event.type == sf::Event::MouseButtonPressed) {
                 }
+                else if(sf::Keyboard::isKeyPressed(sf::Keyboard::W)) {
+                    t.set_direction(0);
+                }
+                else if(sf::Keyboard::isKeyPressed(sf::Keyboard::D)) {
+                    t.set_direction(1);
+                }
+                else if(sf::Keyboard::isKeyPressed(sf::Keyboard::S)) {
+                    t.set_direction(2);
+                }
+                else if(sf::Keyboard::isKeyPressed(sf::Keyboard::A)) {
+                    t.set_direction(3);
+                }
             }
 
             wind_.clear(sf::Color::White);
