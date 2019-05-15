@@ -5,13 +5,11 @@ void texture_manager::set_data(texture_keeper * data) {
 }
 
 void texture_manager::set_number(unsigned short number) {
-    if(number_ <= data_->data_.size())
-        number_ = number;
-    else
-        number_ = 0;
+    number_ = number;
 }
 
 texture_manager::texture_manager(texture_keeper * data, unsigned short number) {
+    std::cout << "Initializing texture manager" << std::endl;
     set_data(data);
     set_number(number);
 }
@@ -21,12 +19,15 @@ sf::Texture & texture_manager::get_texture() {
 }
 
 texture_keeper::texture_keeper(int k) {
-    sf::Texture T;
-    std::string name = "A";
+    std::string name;
     for(int i = 0; i < k; ++i) {
-        T.loadFromFile("images/" + name + ".png");
-        data_.push_back(T);
         name += "A";
+        sf::Image I;
+        I.loadFromFile("images/" + name + ".png");
+        I.createMaskFromColor(sf::Color::White);
+        sf::Texture T;
+        T.loadFromImage(I);
+        data_.push_back(T);
     }
     std::cout << data_.size();
 

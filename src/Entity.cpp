@@ -1,17 +1,16 @@
 #include "Entity.h"
 
+Entity::Entity() {}
+
 Entity::Entity(unsigned short texture_number, float w, float h, unsigned short direction, unsigned short speed) {
+
+    adjust_provider(&T, texture_number);
+
+    set_sprite(w, h);
 
     set_direction(direction);
 
     set_speed(speed);
-
-    adjust_provider(&T, texture_number);
-
-    set_sprite();
-
-    set_size_of_sprite(w, h);
-
 }
 
 void Entity::set_direction(unsigned short new_direction) {
@@ -47,15 +46,13 @@ sf::Sprite Entity::get_sprite() {
 
 }
 
-void Entity::set_sprite() {
+void Entity::set_sprite(float w, float h) {
 
     spr_.setTexture(provider_.get_texture());
 
-}
-
-void Entity::set_size_of_sprite(float w, float h) {
-
     w_ = w;
     h_ = h;
+
+    spr_.scale(scale / 5., scale / 5.);
 
 }

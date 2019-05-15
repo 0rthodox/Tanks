@@ -1,5 +1,4 @@
 #include "windows.h"
-#include "Entity.h"
 
 int scale = 60;
 
@@ -9,6 +8,9 @@ int main() {
 
     init_window iw;
     iw.work();
+
+    main_window mw;
+    mw.work();
 
     return 0;
 

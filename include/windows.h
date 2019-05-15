@@ -3,8 +3,6 @@
 
 #include "Entity.h"
 
-extern int scale;
-
 class wind {
 
 protected:

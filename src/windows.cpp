@@ -55,6 +55,8 @@ bool main_window::work() {
 
     wind_.create(sf::VideoMode(960, 540), "TANKS");
 
+    tank t(5, 5, 0, 1);
+
         while(wind_.isOpen()) {
 
             sf::Event event;
@@ -79,6 +81,8 @@ bool main_window::work() {
                         elem.setFillColor(sf::Color::Cyan);
                     wind_.draw(elem);
                 }
+
+            wind_.draw(t.get_sprite());
 
 
             wind_.display();
