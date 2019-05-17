@@ -49,57 +49,88 @@ main_window::main_window() {
     map_[2][13] = true;
     map_[6][13] = true;
 
+    tanks.resize(2);
+    for(auto & t : tanks) {
+        projectile prj;
+        t.load_ammo(prj, 3);
+        to_draw.push_back(&t);
+    }
+
 }
 
 bool main_window::work() {
 
     wind_.create(sf::VideoMode(960, 540), "TANKS");
 
-    tank t(5, 5, 0, 1);
-
         while(wind_.isOpen()) {
 
-            sf::Event event;
+            handle_event();
 
-            while(wind_.pollEvent(event)) {
-                if(event.type == sf::Event::Closed) {
-                    wind_.close();
-                }
-                else if(event.type == sf::Event::MouseButtonPressed) {
-                }
-                else if(sf::Keyboard::isKeyPressed(sf::Keyboard::W)) {
-                    t.set_direction(0);
-                }
-                else if(sf::Keyboard::isKeyPressed(sf::Keyboard::D)) {
-                    t.set_direction(1);
-                }
-                else if(sf::Keyboard::isKeyPressed(sf::Keyboard::S)) {
-                    t.set_direction(2);
-                }
-                else if(sf::Keyboard::isKeyPressed(sf::Keyboard::A)) {
-                    t.set_direction(3);
-                }
-            }
+            handle_keyboard();
 
-            wind_.clear(sf::Color::White);
+            draw();
 
-            for(unsigned  short i = 0; i < map_.size(); ++i)
-                for(unsigned short j = 0; j < map_[i].size(); ++j) {
-                    sf::RectangleShape elem(sf::Vector2f(scale, scale));
-                    elem.setPosition(j * scale, i * scale);
-                    if(!map_[i][j])
-                        elem.setFillColor(sf::Color(207, 155, 143, 216));
-                    else
-                        elem.setFillColor(sf::Color::Cyan);
-                    wind_.draw(elem);
-                }
-
-            wind_.draw(t.get_sprite());
-
-
-            wind_.display();
         }
 
         return false;
+
+}
+
+void main_window::handle_event() {
+
+    sf::Event event;
+
+    while(wind_.pollEvent(event)) {
+        if(event.type == sf::Event::Closed) {
+            wind_.close();
+        } else if(event.type == sf::Event::MouseButtonPressed) {
+
+        }
+
+    }
+}
+
+void main_window::handle_keyboard() {
+
+    if(sf::Keyboard::isKeyPressed(sf::Keyboard::W)) {
+                    tanks[0].move(0);
+    } else if (sf::Keyboard::isKeyPressed(sf::Keyboard::D)) {
+                    tanks[0].move(1);
+    } else if (sf::Keyboard::isKeyPressed(sf::Keyboard::S)) {
+                    tanks[0].move(2);
+    } else if (sf::Keyboard::isKeyPressed(sf::Keyboard::A)) {
+                    tanks[0].move(3);
+    }
+    if (sf::Keyboard::isKeyPressed(sf::Keyboard::Left)) {
+                    tanks[1].move(3);
+    } else if (sf::Keyboard::isKeyPressed(sf::Keyboard::Up)) {
+                    tanks[1].move(0);
+    } else if (sf::Keyboard::isKeyPressed(sf::Keyboard::Right)) {
+                    tanks[1].move(1);
+    } else if (sf::Keyboard::isKeyPressed(sf::Keyboard::Down)) {
+                    tanks[1].move(2);
+    }
+
+}
+
+void main_window::draw() {
+    wind_.clear(sf::Color::White);
+
+    for(unsigned  short i = 0; i < map_.size(); ++i)
+        for(unsigned short j = 0; j < map_[i].size(); ++j) {
+            sf::RectangleShape elem(sf::Vector2f(scale, scale));
+            elem.setPosition(j * scale, i * scale);
+            if(!map_[i][j])
+                elem.setFillColor(sf::Color(207, 155, 143, 216));
+            else
+                elem.setFillColor(sf::Color::Cyan);
+            wind_.draw(elem);
+        }
+
+    for(auto & drawable : to_draw) {
+        wind_.draw(drawable->get_sprite());
+    }
+
+    wind_.display();
 
 }

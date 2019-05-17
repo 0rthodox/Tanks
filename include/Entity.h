@@ -24,7 +24,7 @@ public:
 
     void set_sprite(float w, float h);
 
-
+    void move(unsigned short new_direction);
 
     sf::Sprite get_sprite();
 
@@ -57,10 +57,12 @@ class tank : public Entity {
 
 public:
 
-    tank(float w, float h, unsigned short direction, unsigned short speed) :
+    tank(float w = 5, float h = 5, unsigned short direction = 0, unsigned short speed = 1) :
         Entity(1, w, h, direction, speed) {}
 
     void load_ammo(projectile prj, short amount);
+
+    void shoot();
 
 };
 

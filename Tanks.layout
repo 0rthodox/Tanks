@@ -2,9 +2,29 @@
 <CodeBlocks_layout_file>
 	<FileVersion major="1" minor="0" />
 	<ActiveTarget name="Debug" />
+	<File name="src\Entity.cpp" open="1" top="0" tabpos="3" split="0" active="1" splitpos="0" zoom_1="5" zoom_2="0">
+		<Cursor>
+			<Cursor1 position="1313" topLine="42" />
+		</Cursor>
+	</File>
+	<File name="src\support.cpp" open="1" top="0" tabpos="7" split="0" active="1" splitpos="0" zoom_1="5" zoom_2="0">
+		<Cursor>
+			<Cursor1 position="774" topLine="0" />
+		</Cursor>
+	</File>
+	<File name="src\windows.cpp" open="1" top="1" tabpos="4" split="0" active="1" splitpos="0" zoom_1="3" zoom_2="0">
+		<Cursor>
+			<Cursor1 position="1341" topLine="50" />
+		</Cursor>
+	</File>
+	<File name="include\Entity.h" open="1" top="0" tabpos="2" split="0" active="1" splitpos="0" zoom_1="6" zoom_2="0">
+		<Cursor>
+			<Cursor1 position="982" topLine="40" />
+		</Cursor>
+	</File>
 	<File name="main.cpp" open="1" top="0" tabpos="1" split="0" active="1" splitpos="0" zoom_1="5" zoom_2="0">
 		<Cursor>
-			<Cursor1 position="178" topLine="0" />
+			<Cursor1 position="159" topLine="0" />
 		</Cursor>
 	</File>
 	<File name="include\support.h" open="1" top="0" tabpos="6" split="0" active="1" splitpos="0" zoom_1="4" zoom_2="0">
@@ -12,29 +32,9 @@
 			<Cursor1 position="17" topLine="0" />
 		</Cursor>
 	</File>
-	<File name="src\windows.cpp" open="1" top="0" tabpos="4" split="0" active="1" splitpos="0" zoom_1="3" zoom_2="0">
-		<Cursor>
-			<Cursor1 position="1448" topLine="55" />
-		</Cursor>
-	</File>
-	<File name="include\Entity.h" open="1" top="0" tabpos="2" split="0" active="1" splitpos="0" zoom_1="6" zoom_2="0">
-		<Cursor>
-			<Cursor1 position="96" topLine="0" />
-		</Cursor>
-	</File>
-	<File name="src\Entity.cpp" open="1" top="0" tabpos="3" split="0" active="1" splitpos="0" zoom_1="5" zoom_2="0">
-		<Cursor>
-			<Cursor1 position="990" topLine="0" />
-		</Cursor>
-	</File>
-	<File name="src\support.cpp" open="1" top="1" tabpos="7" split="0" active="1" splitpos="0" zoom_1="5" zoom_2="0">
-		<Cursor>
-			<Cursor1 position="758" topLine="3" />
-		</Cursor>
-	</File>
 	<File name="include\windows.h" open="1" top="0" tabpos="5" split="0" active="1" splitpos="0" zoom_1="4" zoom_2="0">
 		<Cursor>
-			<Cursor1 position="63" topLine="9" />
+			<Cursor1 position="568" topLine="12" />
 		</Cursor>
 	</File>
 </CodeBlocks_layout_file>

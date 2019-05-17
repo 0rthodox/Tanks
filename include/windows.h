@@ -32,6 +32,16 @@ class main_window : public wind {
 
     std::vector<std::vector<bool>> map_;
 
+    std::list<Entity *> to_draw;
+
+    std::vector<tank> tanks;
+
+    void handle_keyboard();
+
+    void draw();
+
+    void handle_event();
+
 public:
 
     main_window();
