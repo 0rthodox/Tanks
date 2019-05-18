@@ -51,8 +51,6 @@ main_window::main_window() : clock() {
 
     tanks.resize(2);
     for(auto & t : tanks) {
-        projectile prj;
-        t.load_ammo(prj, 3);
         to_draw.push_back(&t);
     }
 
@@ -69,6 +67,8 @@ bool main_window::work() {
             update_time();
 
             handle_keyboard();
+
+            handle_projectiles();
 
             draw();
 
@@ -95,23 +95,32 @@ void main_window::handle_event() {
 void main_window::handle_keyboard() {
 
     if(sf::Keyboard::isKeyPressed(sf::Keyboard::W)) {
-                    tanks[0].move(0);
+                    move_entity(tanks[0], 0);
     } else if (sf::Keyboard::isKeyPressed(sf::Keyboard::D)) {
-                    tanks[0].move(1);
+                    move_entity(tanks[0], 1);
     } else if (sf::Keyboard::isKeyPressed(sf::Keyboard::S)) {
-                    tanks[0].move(2);
+                    move_entity(tanks[0], 2);
     } else if (sf::Keyboard::isKeyPressed(sf::Keyboard::A)) {
-                    tanks[0].move(3);
+                    move_entity(tanks[0], 3);
+    } else if (sf::Keyboard::isKeyPressed(sf::Keyboard::E)) {
+                    tanks[0].shoot(to_draw);
+    } else if (sf::Keyboard::isKeyPressed(sf::Keyboard::R)) {
+                    tanks[0].load_ammo();
     }
     if (sf::Keyboard::isKeyPressed(sf::Keyboard::Left)) {
-                    tanks[1].move(3);
+                    move_entity(tanks[1], 3);
     } else if (sf::Keyboard::isKeyPressed(sf::Keyboard::Up)) {
-                    tanks[1].move(0);
+                    move_entity(tanks[1], 0);
     } else if (sf::Keyboard::isKeyPressed(sf::Keyboard::Right)) {
-                    tanks[1].move(1);
+                    move_entity(tanks[1], 1);
     } else if (sf::Keyboard::isKeyPressed(sf::Keyboard::Down)) {
-                    tanks[1].move(2);
+                    move_entity(tanks[1], 2);
+    } else if (sf::Keyboard::isKeyPressed(sf::Keyboard::Numpad0)) {
+                    tanks[1].shoot(to_draw);
+    } else if (sf::Keyboard::isKeyPressed(sf::Keyboard::Numpad1)) {
+                    tanks[1].load_ammo();
     }
+
 
 }
 
@@ -139,4 +148,25 @@ void main_window::draw() {
 
 void main_window::update_time() {
     time = clock.restart().asSeconds();
+}
+
+void main_window::move_entity(Entity & e, const unsigned short & new_direction) {
+
+    if(e.get_direction() != new_direction)
+        e.set_direction(new_direction);
+
+    sf::Vector2f dp(time * scale * e.speed_ * ((e.direction_ == 1) - (e.direction_ == 3)), time * scale * e.speed_ * ((e.direction_ == 2) - (e.direction_ == 0)));
+
+    e.update_impulse(dp);
+
+    e.spr_.move(dp);
+
+}
+
+void main_window::handle_projectiles() {
+    for(auto & p_entity : to_draw) {
+        projectile * p_test = dynamic_cast<projectile *>(p_entity);
+        if(p_test)
+            std::cout << "PROJECTILE" << std::endl;
+    }
 }

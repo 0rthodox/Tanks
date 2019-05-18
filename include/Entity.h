@@ -8,30 +8,46 @@ extern int scale;
 
 extern texture_keeper T;
 
+class  main_window;
+
 class Entity {
+
+    friend main_window;
 
 public:
 
     Entity();
 
-    Entity(unsigned short texture_number, float w, float h, unsigned short direction, unsigned short speed);
+    Entity(unsigned short, float, float, unsigned short, unsigned short);
 
-    void adjust_provider(texture_keeper * keeper, unsigned short number);
+    void adjust_provider(texture_keeper *, unsigned short);
 
-    void set_direction(unsigned short new_direction);
+    void set_direction(const unsigned short &);
 
-    void set_speed(unsigned short new_speed);
+    void set_speed(const unsigned short &);
 
-    void set_sprite(float w, float h);
+    void set_sprite(const float &, const float &);
 
-    void move(unsigned short new_direction);
+    void move(unsigned short);
 
-    sf::Sprite get_sprite();
+    const sf::Sprite get_sprite();
+
+    const unsigned short get_speed();
+
+    const unsigned short get_direction();
+
+    void update_impulse(const sf::Vector2f &);
+
+    sf::Vector2f get_impulse();
+
+    virtual ~Entity() = default;
 
 protected:
 
     float w_;
     float h_;
+
+    sf::Vector2f impulse_;
 
     sf::Sprite spr_;
 
@@ -47,22 +63,26 @@ class projectile : public Entity {
 
 public:
 
-    projectile();
+    projectile(float w = 5, float h = 5, unsigned short direction = 0, unsigned short speed = 7) :
+       Entity(2, w, h, direction, speed) {}
 
 };
 
 class tank : public Entity {
 
-    std::list<projectile> ammo_;
+    std::vector<projectile> ammo_;
+    std::list<Entity *> loaded_;
 
 public:
 
-    tank(float w = 5, float h = 5, unsigned short direction = 0, unsigned short speed = 1) :
-        Entity(1, w, h, direction, speed) {}
+    tank(float w = 5, float h = 5, unsigned short direction = 0, unsigned short speed = 3) :
+        Entity(1, w, h, direction, speed), ammo_(3) {}
 
-    void load_ammo(projectile prj, short amount);
+    void load_ammo();
 
-    void shoot();
+    void shoot(std::list<Entity *> &);
+
+    const unsigned short check_loaded();
 
 };
 

@@ -2,15 +2,14 @@
 
 int scale = 60;
 
-texture_keeper T(2);
+texture_keeper T(3);
 
 int main() {
 
     init_window iw;
-    iw.work();
-
     main_window mw;
-    mw.work();
+    if(iw.work())
+        mw.work();
 
     return 0;
 

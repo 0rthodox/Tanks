@@ -2,6 +2,7 @@
 #define WINDOWS_H
 
 #include "Entity.h"
+#include <typeinfo>
 
 class wind {
 
@@ -30,6 +31,8 @@ public:
 
 class main_window : public wind {
 
+    friend void tank::shoot(std::list<Entity *> &);
+
     std::vector<std::vector<bool>> map_;
 
     std::list<Entity *> to_draw;
@@ -47,6 +50,10 @@ class main_window : public wind {
     void handle_event();
 
     void update_time();
+
+    void move_entity(Entity &, const unsigned short &);
+
+    void handle_projectiles();
 
 public:
 

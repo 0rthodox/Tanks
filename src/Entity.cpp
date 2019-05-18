@@ -2,7 +2,7 @@
 
 Entity::Entity() {}
 
-Entity::Entity(unsigned short texture_number, float w, float h, unsigned short direction, unsigned short speed) {
+Entity::Entity(unsigned short texture_number, float w, float h, unsigned short direction, unsigned short speed) : impulse_() {
 
     adjust_provider(&T, texture_number);
 
@@ -13,7 +13,7 @@ Entity::Entity(unsigned short texture_number, float w, float h, unsigned short d
     set_speed(speed);
 }
 
-void Entity::set_direction(unsigned short new_direction) {
+void Entity::set_direction(const unsigned short & new_direction) {
 
     direction_ = new_direction;
 
@@ -21,15 +21,16 @@ void Entity::set_direction(unsigned short new_direction) {
 
 }
 
-void Entity::set_speed(unsigned short new_speed) {
+void Entity::set_speed(const unsigned short & new_speed) {
 
     speed_ = new_speed;
 
 }
 
-void tank::load_ammo(projectile prj, short amount) {
+void tank::load_ammo() {
 
-    ammo_.assign(amount, prj);
+    for(auto & prj : ammo_)
+        loaded_.push_back(dynamic_cast<Entity *>(&prj));
 
 }
 
@@ -40,20 +41,20 @@ void Entity::adjust_provider(texture_keeper * keeper, unsigned short number) {
 
 }
 
-sf::Sprite Entity::get_sprite() {
+const sf::Sprite Entity::get_sprite() {
 
     return spr_;
 
 }
 
-void Entity::set_sprite(float w, float h) {
+void Entity::set_sprite(const float & w, const float & h) {
 
     spr_.setTexture(provider_.get_texture());
 
     w_ = w;
     h_ = h;
 
-    spr_.scale(scale / 5., scale / 5.);
+    spr_.scale(scale / w_, scale / h_);
 
 }
 
@@ -63,10 +64,37 @@ void Entity::move(unsigned short new_direction) {
     spr_.move(0.001 * scale * speed_ * ((direction_ == 1) - (direction_ == 3)), 0.001 * scale * speed_ * ((direction_ == 2) - (direction_ == 0)));
 }
 
-void tank::shoot() {
+void tank::shoot(std::list<Entity *> & where_to_shoot) {
+
+    if(check_loaded()) {
+
+        (*loaded_.begin())->set_direction(get_direction());
+
+        where_to_shoot.splice(where_to_shoot.begin(), loaded_, loaded_.begin());
+    }
 
 }
 
-projectile::projectile() {
-    speed_ = 3;
+const unsigned short Entity::get_direction() {
+    return direction_;
+}
+
+const unsigned short Entity::get_speed() {
+    return speed_;
+}
+
+void Entity::update_impulse(const sf::Vector2f & dp) {
+
+    impulse_ += dp;
+
+}
+
+sf::Vector2f Entity::get_impulse() {
+
+    return impulse_;
+
+}
+
+const unsigned short tank::check_loaded() {
+    return loaded_.size();
 }
