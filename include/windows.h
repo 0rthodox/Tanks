@@ -36,11 +36,17 @@ class main_window : public wind {
 
     std::vector<tank> tanks;
 
+    sf::Clock clock;
+
+    float time;
+
     void handle_keyboard();
 
     void draw();
 
     void handle_event();
+
+    void update_time();
 
 public:
 

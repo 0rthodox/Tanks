@@ -4,7 +4,7 @@ wind::wind() {}
 
 bool init_window::work() {
 
-        wind_.create(sf::VideoMode(960, 540), "TANKS");
+        wind_.create(sf::VideoMode(16 * scale, 9 * scale), "TANKS");
 
         main_sprite_.scale(scale, scale);
 
@@ -32,14 +32,14 @@ bool init_window::work() {
         return false;
 }
 
-init_window::init_window() : provider_(&T, 0){
+init_window::init_window() : provider_(&T, 0) {
 
     main_sprite_.setTexture(provider_.get_texture());
     main_sprite_.setScale(1 / 120., 1 / 120.);
 
 }
 
-main_window::main_window() {
+main_window::main_window() : clock() {
 
     map_.resize(9);
     for(auto & str : map_)
@@ -60,11 +60,13 @@ main_window::main_window() {
 
 bool main_window::work() {
 
-    wind_.create(sf::VideoMode(960, 540), "TANKS");
+    wind_.create(sf::VideoMode(16 * scale, 9 * scale), "TANKS");
 
         while(wind_.isOpen()) {
 
             handle_event();
+
+            update_time();
 
             handle_keyboard();
 
@@ -133,4 +135,8 @@ void main_window::draw() {
 
     wind_.display();
 
+}
+
+void main_window::update_time() {
+    time = clock.restart().asSeconds();
 }

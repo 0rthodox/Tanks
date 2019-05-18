@@ -60,7 +60,7 @@ void Entity::set_sprite(float w, float h) {
 void Entity::move(unsigned short new_direction) {
     if(direction_ != new_direction)
         set_direction(new_direction);
-    spr_.move(speed_ * ((direction_ == 1) - (direction_ == 3)), speed_ * ((direction_ == 2) - (direction_ == 0)));
+    spr_.move(0.001 * scale * speed_ * ((direction_ == 1) - (direction_ == 3)), 0.001 * scale * speed_ * ((direction_ == 2) - (direction_ == 0)));
 }
 
 void tank::shoot() {
