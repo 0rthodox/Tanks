@@ -59,6 +59,7 @@ main_window::main_window() : clock() {
 bool main_window::work() {
 
     wind_.create(sf::VideoMode(16 * scale, 9 * scale), "TANKS");
+    wind_.setFramerateLimit(rate);
 
         while(wind_.isOpen()) {
 
@@ -155,7 +156,13 @@ void main_window::move_entity(Entity & e, const unsigned short & new_direction) 
     if(e.get_direction() != new_direction)
         e.set_direction(new_direction);
 
-    sf::Vector2f dp(time * scale * e.speed_ * ((e.direction_ == 1) - (e.direction_ == 3)), time * scale * e.speed_ * ((e.direction_ == 2) - (e.direction_ == 0)));
+    move_entity(e);
+
+}
+
+void main_window::move_entity(Entity & e) {
+
+    sf::Vector2f dp(time / rate * scale * e.speed_ * ((e.direction_ == 1) - (e.direction_ == 3)), time / rate * scale * e.speed_ * ((e.direction_ == 2) - (e.direction_ == 0)));
 
     e.update_impulse(dp);
 
@@ -167,6 +174,6 @@ void main_window::handle_projectiles() {
     for(auto & p_entity : to_draw) {
         projectile * p_test = dynamic_cast<projectile *>(p_entity);
         if(p_test)
-            std::cout << "PROJECTILE" << std::endl;
+            move_entity(*p_entity);
     }
 }

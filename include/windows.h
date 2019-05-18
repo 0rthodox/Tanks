@@ -4,6 +4,8 @@
 #include "Entity.h"
 #include <typeinfo>
 
+extern int rate;
+
 class wind {
 
 protected:
@@ -52,6 +54,8 @@ class main_window : public wind {
     void update_time();
 
     void move_entity(Entity &, const unsigned short &);
+
+    void move_entity(Entity &);
 
     void handle_projectiles();
 

@@ -70,6 +70,8 @@ void tank::shoot(std::list<Entity *> & where_to_shoot) {
 
         (*loaded_.begin())->set_direction(get_direction());
 
+        (*loaded_.begin())->set_position(get_position());
+
         where_to_shoot.splice(where_to_shoot.begin(), loaded_, loaded_.begin());
     }
 
@@ -97,4 +99,16 @@ sf::Vector2f Entity::get_impulse() {
 
 const unsigned short tank::check_loaded() {
     return loaded_.size();
+}
+
+void Entity::set_position(const float & x, const float & y) {
+    spr_.setPosition(x, y);
+}
+
+void Entity::set_position(const sf::Vector2f & new_position) {
+    spr_.setPosition(new_position);
+}
+
+const sf::Vector2f Entity::get_position() {
+    return spr_.getPosition();
 }

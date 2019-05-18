@@ -24,6 +24,10 @@ public:
 
     void set_direction(const unsigned short &);
 
+    void set_position(const float &, const float &);
+
+    void set_position(const sf::Vector2f &);
+
     void set_speed(const unsigned short &);
 
     void set_sprite(const float &, const float &);
@@ -39,6 +43,8 @@ public:
     void update_impulse(const sf::Vector2f &);
 
     sf::Vector2f get_impulse();
+
+    const sf::Vector2f get_position();
 
     virtual ~Entity() = default;
 
@@ -63,7 +69,7 @@ class projectile : public Entity {
 
 public:
 
-    projectile(float w = 5, float h = 5, unsigned short direction = 0, unsigned short speed = 7) :
+    projectile(float w = 5, float h = 5, unsigned short direction = 0, unsigned short speed = 60) :
        Entity(2, w, h, direction, speed) {}
 
 };
@@ -75,7 +81,7 @@ class tank : public Entity {
 
 public:
 
-    tank(float w = 5, float h = 5, unsigned short direction = 0, unsigned short speed = 3) :
+    tank(float w = 5, float h = 5, unsigned short direction = 0, unsigned short speed = 30) :
         Entity(1, w, h, direction, speed), ammo_(3) {}
 
     void load_ammo();
