@@ -103,10 +103,6 @@ void main_window::handle_keyboard() {
                     move_entity(tanks[0], 2);
     } else if (sf::Keyboard::isKeyPressed(sf::Keyboard::A)) {
                     move_entity(tanks[0], 3);
-    } else if (sf::Keyboard::isKeyPressed(sf::Keyboard::E)) {
-                    tanks[0].shoot(to_draw);
-    } else if (sf::Keyboard::isKeyPressed(sf::Keyboard::R)) {
-                    tanks[0].load_ammo();
     }
     if (sf::Keyboard::isKeyPressed(sf::Keyboard::Left)) {
                     move_entity(tanks[1], 3);
@@ -116,12 +112,7 @@ void main_window::handle_keyboard() {
                     move_entity(tanks[1], 1);
     } else if (sf::Keyboard::isKeyPressed(sf::Keyboard::Down)) {
                     move_entity(tanks[1], 2);
-    } else if (sf::Keyboard::isKeyPressed(sf::Keyboard::Numpad0)) {
-                    tanks[1].shoot(to_draw);
-    } else if (sf::Keyboard::isKeyPressed(sf::Keyboard::Numpad1)) {
-                    tanks[1].load_ammo();
     }
-
 
 }
 

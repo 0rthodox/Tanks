@@ -33,8 +33,6 @@ public:
 
 class main_window : public wind {
 
-    friend void tank::shoot(std::list<Entity *> &);
-
     std::vector<std::vector<bool>> map_;
 
     std::list<Entity *> to_draw;

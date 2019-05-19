@@ -76,19 +76,12 @@ public:
 
 class tank : public Entity {
 
-    std::vector<projectile> ammo_;
-    std::list<Entity *> loaded_;
-
 public:
 
     tank(float w = 5, float h = 5, unsigned short direction = 0, unsigned short speed = 30) :
-        Entity(1, w, h, direction, speed), ammo_(3) {}
+        Entity(1, w, h, direction, speed) {}
 
-    void load_ammo();
 
-    void shoot(std::list<Entity *> &);
-
-    const unsigned short check_loaded();
 
 };
 

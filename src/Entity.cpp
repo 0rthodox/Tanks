@@ -27,13 +27,6 @@ void Entity::set_speed(const unsigned short & new_speed) {
 
 }
 
-void tank::load_ammo() {
-
-    for(auto & prj : ammo_)
-        loaded_.push_back(dynamic_cast<Entity *>(&prj));
-
-}
-
 void Entity::adjust_provider(texture_keeper * keeper, unsigned short number) {
 
     provider_.set_data(keeper);
@@ -64,19 +57,6 @@ void Entity::move(unsigned short new_direction) {
     spr_.move(0.001 * scale * speed_ * ((direction_ == 1) - (direction_ == 3)), 0.001 * scale * speed_ * ((direction_ == 2) - (direction_ == 0)));
 }
 
-void tank::shoot(std::list<Entity *> & where_to_shoot) {
-
-    if(check_loaded()) {
-
-        (*loaded_.begin())->set_direction(get_direction());
-
-        (*loaded_.begin())->set_position(get_position());
-
-        where_to_shoot.splice(where_to_shoot.begin(), loaded_, loaded_.begin());
-    }
-
-}
-
 const unsigned short Entity::get_direction() {
     return direction_;
 }
@@ -95,10 +75,6 @@ sf::Vector2f Entity::get_impulse() {
 
     return impulse_;
 
-}
-
-const unsigned short tank::check_loaded() {
-    return loaded_.size();
 }
 
 void Entity::set_position(const float & x, const float & y) {
