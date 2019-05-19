@@ -2,7 +2,7 @@
 
 Entity::Entity() {}
 
-Entity::Entity(unsigned short texture_number, float w, float h, unsigned short direction, unsigned short speed) : impulse_() {
+Entity::Entity(const unsigned short & texture_number, const float & w, const float & h, const unsigned short & direction, const unsigned short & speed, const sf::Vector2f & position) : impulse_() {
 
     adjust_provider(&T, texture_number);
 
@@ -11,6 +11,8 @@ Entity::Entity(unsigned short texture_number, float w, float h, unsigned short d
     set_direction(direction);
 
     set_speed(speed);
+
+    set_position(position);
 }
 
 void Entity::set_direction(const unsigned short & new_direction) {
@@ -51,12 +53,6 @@ void Entity::set_sprite(const float & w, const float & h) {
 
 }
 
-void Entity::move(unsigned short new_direction) {
-    if(direction_ != new_direction)
-        set_direction(new_direction);
-    spr_.move(0.001 * scale * speed_ * ((direction_ == 1) - (direction_ == 3)), 0.001 * scale * speed_ * ((direction_ == 2) - (direction_ == 0)));
-}
-
 const unsigned short Entity::get_direction() {
     return direction_;
 }
@@ -87,4 +83,8 @@ void Entity::set_position(const sf::Vector2f & new_position) {
 
 const sf::Vector2f Entity::get_position() {
     return spr_.getPosition();
+}
+
+projectile tank::shoot() {
+    return projectile(direction_, get_position());
 }

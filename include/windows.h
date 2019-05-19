@@ -35,9 +35,9 @@ class main_window : public wind {
 
     std::vector<std::vector<bool>> map_;
 
-    std::list<Entity *> to_draw;
-
     std::vector<tank> tanks;
+
+    std::list<projectile> projectiles;
 
     sf::Clock clock;
 

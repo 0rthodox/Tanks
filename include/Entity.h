@@ -18,7 +18,7 @@ public:
 
     Entity();
 
-    Entity(unsigned short, float, float, unsigned short, unsigned short);
+    Entity(const unsigned short &, const float &, const float &, const unsigned short &, const unsigned short &, const sf::Vector2f &);
 
     void adjust_provider(texture_keeper *, unsigned short);
 
@@ -31,8 +31,6 @@ public:
     void set_speed(const unsigned short &);
 
     void set_sprite(const float &, const float &);
-
-    void move(unsigned short);
 
     const sf::Sprite get_sprite();
 
@@ -69,8 +67,8 @@ class projectile : public Entity {
 
 public:
 
-    projectile(float w = 5, float h = 5, unsigned short direction = 0, unsigned short speed = 60) :
-       Entity(2, w, h, direction, speed) {}
+    projectile(const unsigned short & direction = 0, const sf::Vector2f & position = sf::Vector2f(), const unsigned short & speed = 60, const float & w = 5, const float & h = 5) :
+       Entity(2, w, h, direction, speed, position) {}
 
 };
 
@@ -78,8 +76,10 @@ class tank : public Entity {
 
 public:
 
-    tank(float w = 5, float h = 5, unsigned short direction = 0, unsigned short speed = 30) :
-        Entity(1, w, h, direction, speed) {}
+    tank(const unsigned short & direction = 0, const sf::Vector2f & position = sf::Vector2f(),  const unsigned short & speed = 30, const float & w = 5, const float & h = 5) :
+        Entity(1, w, h, direction, speed, position) {}
+
+    projectile shoot();
 
 
 

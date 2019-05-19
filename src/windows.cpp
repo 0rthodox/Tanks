@@ -49,10 +49,8 @@ main_window::main_window() : clock() {
     map_[2][13] = true;
     map_[6][13] = true;
 
-    tanks.resize(2);
-    for(auto & t : tanks) {
-        to_draw.push_back(&t);
-    }
+    tanks.push_back(tank(1, sf::Vector2f()));
+    tanks.push_back(tank(3, sf::Vector2f(15 * scale, 8 * scale)));
 
 }
 
@@ -113,6 +111,12 @@ void main_window::handle_keyboard() {
     } else if (sf::Keyboard::isKeyPressed(sf::Keyboard::Down)) {
                     move_entity(tanks[1], 2);
     }
+    if (sf::Keyboard::isKeyPressed(sf::Keyboard::E)) {
+        projectiles.push_back(tanks[0].shoot());
+    }
+    if (sf::Keyboard::isKeyPressed(sf::Keyboard::Numpad0)) {
+        projectiles.push_back(tanks[1].shoot());
+    }
 
 }
 
@@ -130,8 +134,11 @@ void main_window::draw() {
             wind_.draw(elem);
         }
 
-    for(auto & drawable : to_draw) {
-        wind_.draw(drawable->get_sprite());
+    for(auto & tank : tanks) {
+        wind_.draw(tank.get_sprite());
+    }
+    for(auto & prj : projectiles) {
+        wind_.draw(prj.get_sprite());
     }
 
     wind_.display();
@@ -155,16 +162,16 @@ void main_window::move_entity(Entity & e) {
 
     sf::Vector2f dp(time / rate * scale * e.speed_ * ((e.direction_ == 1) - (e.direction_ == 3)), time / rate * scale * e.speed_ * ((e.direction_ == 2) - (e.direction_ == 0)));
 
-    e.update_impulse(dp);
+    //e.update_impulse(dp);
 
     e.spr_.move(dp);
 
 }
 
 void main_window::handle_projectiles() {
-    for(auto & p_entity : to_draw) {
-        projectile * p_test = dynamic_cast<projectile *>(p_entity);
-        if(p_test)
-            move_entity(*p_entity);
+    for(auto & prj : projectiles) {
+
+        move_entity(prj);
+
     }
 }
