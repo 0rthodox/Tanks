@@ -32,3 +32,21 @@ texture_keeper::texture_keeper(int k) {
     std::cout << data_.size();
 
 }
+
+sf::Vector2f check_bounds(const sf::Vector2f & position , const short & xlim, const short & ylim) {
+
+    float dx = 0, dy = 0;
+
+    if (position.x < 0)
+        dx = -position.x;
+    else if (position.x > (xlim - 1) * scale)
+        dx = (xlim - 1) * scale - position.x;
+
+    if (position.y < 0)
+        dy = -position.y;
+    else if (position.y > (ylim - 1) * scale)
+        dy = (ylim - 1) * scale - position.y;
+
+    return sf::Vector2f(dx, dy);
+
+}

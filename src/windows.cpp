@@ -69,6 +69,9 @@ bool main_window::work() {
 
             handle_projectiles();
 
+            if(check_hits())
+                break;
+
             draw();
 
         }
@@ -160,18 +163,47 @@ void main_window::move_entity(Entity & e, const unsigned short & new_direction) 
 
 void main_window::move_entity(Entity & e) {
 
-    sf::Vector2f dp(time / rate * scale * e.speed_ * ((e.direction_ == 1) - (e.direction_ == 3)), time / rate * scale * e.speed_ * ((e.direction_ == 2) - (e.direction_ == 0)));
+    sf::Vector2f dp(time * scale * e.speed_ * ((e.direction_ == 1) - (e.direction_ == 3)) / 60,
+                    time * scale * e.speed_ * ((e.direction_ == 2) - (e.direction_ == 0)) / 60);
 
-    //e.update_impulse(dp);
+    std::modf(dp.x, &dp.x);
+    std::modf(dp.y, &dp.y);
 
     e.spr_.move(dp);
+
+    e.spr_.move(check_bounds(e.get_position()));
 
 }
 
 void main_window::handle_projectiles() {
-    for(auto & prj : projectiles) {
+    for(auto it = projectiles.begin(); it != projectiles.end(); ++it) {
 
-        move_entity(prj);
+        move_entity(*it);
 
+        if((it->get_position().x == 0 && it->get_direction() == 3) || (it->get_position().x == 15 * scale && it->get_direction() == 1)
+           || (it->get_position().y == 0 && it->get_direction() == 0) || (it->get_position().y == 8 * scale && it->get_direction() == 2))
+            it = projectiles.erase(it);
     }
+
+}
+
+bool main_window::check_hit(const tank & t) {
+    sf::FloatRect tank_bounds = const_cast<tank &>(t).get_sprite().getGlobalBounds();
+    for(auto & prj : projectiles) {
+        if(prj.get_sprite().getGlobalBounds().intersects(tank_bounds))
+            return true;
+    }
+    return false;
+}
+
+bool main_window::check_hits() {
+    bool res = false;
+    for(size_t i = 0; i < tanks.size(); ++i) {
+
+        if (check_hit(tanks[i])) {
+            std::cout << "Tank " << i << " was hit" << std::endl;
+            res = true;
+        }
+    }
+    return res;
 }

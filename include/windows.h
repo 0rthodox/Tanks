@@ -2,7 +2,6 @@
 #define WINDOWS_H
 
 #include "Entity.h"
-#include <typeinfo>
 
 extern int rate;
 
@@ -20,6 +19,7 @@ public:
 };
 
 class init_window : public wind {
+
     texture_manager provider_;
     sf::Sprite main_sprite_;
 
@@ -56,6 +56,10 @@ class main_window : public wind {
     void move_entity(Entity &);
 
     void handle_projectiles();
+
+    bool check_hit(const tank &);
+
+    bool check_hits();
 
 public:
 

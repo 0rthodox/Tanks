@@ -4,10 +4,16 @@
 #include <string>
 #include <vector>
 #include <iostream>
+#include <list>
+#include <cmath>
 
 #include <SFML/Graphics.hpp>
 
 class texture_manager;
+
+extern int scale;
+
+sf::Vector2f check_bounds(const sf::Vector2f &, const short & = 16 , const short & = 9);
 
 class texture_keeper {
     friend texture_manager;
@@ -21,9 +27,9 @@ class texture_manager {
     unsigned short number_;
 public:
     texture_manager() {}
-    texture_manager(texture_keeper * data, unsigned short number);
-    void set_data(texture_keeper * data);
-    void set_number(unsigned short number);
+    texture_manager(texture_keeper *, unsigned short);
+    void set_data(texture_keeper *);
+    void set_number(unsigned short);
     sf::Texture & get_texture();
 };
 

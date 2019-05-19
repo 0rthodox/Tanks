@@ -2,7 +2,7 @@
 
 Entity::Entity() {}
 
-Entity::Entity(const unsigned short & texture_number, const float & w, const float & h, const unsigned short & direction, const unsigned short & speed, const sf::Vector2f & position) : impulse_() {
+Entity::Entity(const unsigned short & texture_number, const float & w, const float & h, const unsigned short & direction, const unsigned short & speed, const sf::Vector2f & position) {
 
     adjust_provider(&T, texture_number);
 
@@ -61,18 +61,6 @@ const unsigned short Entity::get_speed() {
     return speed_;
 }
 
-void Entity::update_impulse(const sf::Vector2f & dp) {
-
-    impulse_ += dp;
-
-}
-
-sf::Vector2f Entity::get_impulse() {
-
-    return impulse_;
-
-}
-
 void Entity::set_position(const float & x, const float & y) {
     spr_.setPosition(x, y);
 }
@@ -86,5 +74,7 @@ const sf::Vector2f Entity::get_position() {
 }
 
 projectile tank::shoot() {
-    return projectile(direction_, get_position());
+    return projectile(direction_, get_position() +
+                      sf::Vector2f(scale * ((direction_ == 1) - (direction_ == 3)),
+                                   scale * ((direction_ == 2) - (direction_ == 0))));
 }
