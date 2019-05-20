@@ -50,7 +50,11 @@ main_window::main_window() : clock() {
     map_[6][13] = true;
 
     tanks.push_back(tank(1, sf::Vector2f()));
+    tanks[0].set_keys(sf::Keyboard::W, sf::Keyboard::A, sf::Keyboard::S,
+                      sf::Keyboard::D, sf::Keyboard::E, sf::Keyboard::Q);
     tanks.push_back(tank(3, sf::Vector2f(15 * scale, 8 * scale)));
+    tanks[1].set_keys(sf::Keyboard::Numpad8, sf::Keyboard::Numpad4, sf::Keyboard::Numpad5,
+                      sf::Keyboard::Numpad6, sf::Keyboard::Numpad9, sf::Keyboard::Numpad7);
 
 }
 
@@ -96,31 +100,22 @@ void main_window::handle_event() {
 
 void main_window::handle_keyboard() {
 
-    if(sf::Keyboard::isKeyPressed(sf::Keyboard::W)) {
-                    move_entity(tanks[0], 0);
-    } else if (sf::Keyboard::isKeyPressed(sf::Keyboard::D)) {
-                    move_entity(tanks[0], 1);
-    } else if (sf::Keyboard::isKeyPressed(sf::Keyboard::S)) {
-                    move_entity(tanks[0], 2);
-    } else if (sf::Keyboard::isKeyPressed(sf::Keyboard::A)) {
-                    move_entity(tanks[0], 3);
-    }
-    if (sf::Keyboard::isKeyPressed(sf::Keyboard::Left)) {
-                    move_entity(tanks[1], 3);
-    } else if (sf::Keyboard::isKeyPressed(sf::Keyboard::Up)) {
-                    move_entity(tanks[1], 0);
-    } else if (sf::Keyboard::isKeyPressed(sf::Keyboard::Right)) {
-                    move_entity(tanks[1], 1);
-    } else if (sf::Keyboard::isKeyPressed(sf::Keyboard::Down)) {
-                    move_entity(tanks[1], 2);
-    }
-    if (sf::Keyboard::isKeyPressed(sf::Keyboard::E)) {
-        launch_missile(tanks[0]);
-    }
-    if (sf::Keyboard::isKeyPressed(sf::Keyboard::Numpad0)) {
-        launch_missile(tanks[1]);
-    }
+    for (auto & tank : tanks) {
 
+        if(sf::Keyboard::isKeyPressed(tank.Keys.get_up())) {
+            move_entity(tank, 0);
+        } else if (sf::Keyboard::isKeyPressed(tank.Keys.get_right())) {
+            move_entity(tank, 1);
+        } else if (sf::Keyboard::isKeyPressed(tank.Keys.get_down())) {
+            move_entity(tank, 2);
+        } else if (sf::Keyboard::isKeyPressed(tank.Keys.get_left())) {
+            move_entity(tank, 3);
+        }
+        if (sf::Keyboard::isKeyPressed(tank.Keys.get_launch())) {
+            launch_missile(tank);
+        }
+
+    }
 }
 
 void main_window::draw() {

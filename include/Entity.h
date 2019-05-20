@@ -64,6 +64,7 @@ class tank : public Entity {
     short health_;
 
 public:
+    keys Keys;
 
 //CD-tors:
     tank(const unsigned short & = 0, const sf::Vector2f & = sf::Vector2f(),
@@ -73,6 +74,9 @@ public:
     void set_main_cooldown(const sf::Time &);
     void set_time_of_last_launch(const sf::Time &);
     void set_health(const short &);
+    void set_keys(const sf::Keyboard::Key & = sf::Keyboard::Unknown, const sf::Keyboard::Key & = sf::Keyboard::Unknown,
+                  const sf::Keyboard::Key & = sf::Keyboard::Unknown, const sf::Keyboard::Key & = sf::Keyboard::Unknown,
+                  const sf::Keyboard::Key & = sf::Keyboard::Unknown, const sf::Keyboard::Key & = sf::Keyboard::Unknown);
 
 //Getters:
     sf::Time get_main_cooldown() const;

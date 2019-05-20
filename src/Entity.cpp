@@ -127,3 +127,8 @@ projectile::projectile(const unsigned short & direction, const sf::Vector2f & po
 bool Entity::intersects(const Entity & E) {
     return get_sprite().getGlobalBounds().intersects(E.get_sprite().getGlobalBounds());
 }
+
+void tank::set_keys(const sf::Keyboard::Key & up, const sf::Keyboard::Key & left, const sf::Keyboard::Key & down,
+                    const sf::Keyboard::Key & right, const sf::Keyboard::Key & launch, const sf::Keyboard::Key & shoot) {
+    Keys = keys(up, left, down, right, launch, shoot);
+}
