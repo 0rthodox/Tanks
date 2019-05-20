@@ -74,13 +74,29 @@ public:
 
 class tank : public Entity {
 
+    sf::Time main_cooldown_;
+
+    sf::Time time_of_last_launch_;
+
+    short health_;
+
 public:
 
-    tank(const unsigned short & direction = 0, const sf::Vector2f & position = sf::Vector2f(),
-         const unsigned short & speed = 120, const float & w = 5, const float & h = 5) :
-        Entity(1, w, h, direction, speed, position) {}
+    tank(const unsigned short & = 0, const sf::Vector2f & = sf::Vector2f(),
+         const unsigned short & = 120, const float & = 5, const float & = 5);
 
-    projectile shoot();
+    void set_main_cooldown(const sf::Time &);
+
+    void set_time_of_last_launch(const sf::Time &);
+
+    void set_health(const short &);
+
+    sf::Time get_main_cooldown() const;
+
+    sf::Time get_time_of_last_launch() const;
+
+    short get_health() const;
+
 };
 
 #endif // ENTITY_H

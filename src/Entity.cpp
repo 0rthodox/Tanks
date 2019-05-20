@@ -73,8 +73,33 @@ const sf::Vector2f Entity::get_position() {
     return spr_.getPosition();
 }
 
-projectile tank::shoot() {
-    return projectile(direction_, get_position() +
-                      sf::Vector2f(scale * ((direction_ == 1) - (direction_ == 3)),
-                                   scale * ((direction_ == 2) - (direction_ == 0))));
+tank::tank(const unsigned short & direction, const sf::Vector2f & position,
+         const unsigned short & speed, const float & w, const float & h) :
+        Entity(1, w, h, direction, speed, position) {
+            set_main_cooldown(sf::seconds(1.f));
+            set_time_of_last_launch(sf::seconds(-1.f));
+        }
+
+void tank::set_main_cooldown(const sf::Time & new_cooldown) {
+    main_cooldown_ = new_cooldown;
+}
+
+void tank::set_time_of_last_launch(const sf::Time & new_time) {
+    time_of_last_launch_ = new_time;
+}
+
+sf::Time tank::get_main_cooldown() const {
+    return main_cooldown_;
+}
+
+sf::Time tank::get_time_of_last_launch() const {
+    return time_of_last_launch_;
+}
+
+void tank::set_health(const short & new_health) {
+    health_ = new_health;
+}
+
+short tank::get_health() const {
+    return health_;
 }

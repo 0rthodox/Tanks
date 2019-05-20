@@ -115,10 +115,10 @@ void main_window::handle_keyboard() {
                     move_entity(tanks[1], 2);
     }
     if (sf::Keyboard::isKeyPressed(sf::Keyboard::E)) {
-        projectiles.push_back(tanks[0].shoot());
+        launch_missile(tanks[0]);
     }
     if (sf::Keyboard::isKeyPressed(sf::Keyboard::Numpad0)) {
-        projectiles.push_back(tanks[1].shoot());
+        launch_missile(tanks[1]);
     }
 
 }
@@ -206,4 +206,14 @@ bool main_window::check_hits() {
         }
     }
     return res;
+}
+
+void main_window::launch_missile(tank & t) {
+    sf::Time current_time = const_clock.getElapsedTime();
+    if(current_time - t.get_time_of_last_launch() >= t.get_main_cooldown()) {
+        t.set_time_of_last_launch(current_time);
+        projectiles.push_back(projectile(t.get_direction(),
+                                         t.get_position() + sf::Vector2f(scale * ((t.get_direction() == 1) - (t.get_direction() == 3)),
+                                                                                            scale * ((t.get_direction() == 2) - (t.get_direction() == 0)))));
+    }
 }

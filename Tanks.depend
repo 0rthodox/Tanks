@@ -1,5 +1,5 @@
 # depslib dependency file v1.0
-1558270785 source:c:\dev\tanks\main.cpp
+1558361020 source:c:\dev\tanks\main.cpp
 	"windows.h"
 
 1557001419 c:\dev\tanks\windows.h
@@ -10,13 +10,13 @@
 1557002327 source:c:\dev\tanks\windows.cpp
 	"windows.h"
 
-1558272270 c:\dev\tanks\include\windows.h
+1558362810 c:\dev\tanks\include\windows.h
 	"Entity.h"
 
-1558273338 c:\dev\tanks\include\entity.h
+1558361793 c:\dev\tanks\include\entity.h
 	"support.h"
 
-1558273263 source:c:\dev\tanks\src\windows.cpp
+1558362456 source:c:\dev\tanks\src\windows.cpp
 	"windows.h"
 
 1558273399 c:\dev\tanks\include\support.h
@@ -27,7 +27,7 @@
 	<cmath>
 	<SFML/Graphics.hpp>
 
-1558272539 source:c:\dev\tanks\src\entity.cpp
+1558362727 source:c:\dev\tanks\src\entity.cpp
 	"Entity.h"
 
 1558269531 source:c:\dev\tanks\src\support.cpp

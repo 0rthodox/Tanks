@@ -41,6 +41,8 @@ class main_window : public wind {
 
     sf::Clock clock;
 
+    sf::Clock const_clock;
+
     float time;
 
     void handle_keyboard();
@@ -60,6 +62,8 @@ class main_window : public wind {
     bool check_hit(const tank &);
 
     bool check_hits();
+
+    void launch_missile(tank &);
 
 public:
 

@@ -2,7 +2,7 @@
 
 int scale = 60;
 
-int rate = 60;
+int rate = 30;
 
 texture_keeper T(3);
 
