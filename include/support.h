@@ -39,34 +39,12 @@ public:
     sf::Texture & get_texture();
 };
 
-class keys {
+struct Keys {
     sf::Keyboard::Key Up_;
     sf::Keyboard::Key Left_;
     sf::Keyboard::Key Down_;
     sf::Keyboard::Key Right_;
     sf::Keyboard::Key Launch_;
     sf::Keyboard::Key Shoot_;
-
-public:
-//CDtors:
-    keys(const sf::Keyboard::Key & = sf::Keyboard::Unknown, const sf::Keyboard::Key & = sf::Keyboard::Unknown, const sf::Keyboard::Key & = sf::Keyboard::Unknown,
-         const sf::Keyboard::Key & = sf::Keyboard::Unknown, const sf::Keyboard::Key & = sf::Keyboard::Unknown, const sf::Keyboard::Key & = sf::Keyboard::Unknown);
-
-//Setters:
-    void set_up(const sf::Keyboard::Key &);
-    void set_left(const sf::Keyboard::Key &);
-    void set_down(const sf::Keyboard::Key &);
-    void set_right(const sf::Keyboard::Key &);
-    void set_launch(const sf::Keyboard::Key &);
-    void set_shoot(const sf::Keyboard::Key &);
-
-//Getters:
-    sf::Keyboard::Key get_up() const;
-    sf::Keyboard::Key get_left() const;
-    sf::Keyboard::Key get_down() const;
-    sf::Keyboard::Key get_right() const;
-    sf::Keyboard::Key get_launch() const;
-    sf::Keyboard::Key get_shoot() const;
-
 };
 #endif // SUPPORT_H

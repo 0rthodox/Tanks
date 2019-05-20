@@ -102,16 +102,16 @@ void main_window::handle_keyboard() {
 
     for (auto & tank : tanks) {
 
-        if(sf::Keyboard::isKeyPressed(tank.Keys.get_up())) {
+        if(sf::Keyboard::isKeyPressed(tank.get_up())) {
             move_entity(tank, 0);
-        } else if (sf::Keyboard::isKeyPressed(tank.Keys.get_right())) {
+        } else if (sf::Keyboard::isKeyPressed(tank.get_right())) {
             move_entity(tank, 1);
-        } else if (sf::Keyboard::isKeyPressed(tank.Keys.get_down())) {
+        } else if (sf::Keyboard::isKeyPressed(tank.get_down())) {
             move_entity(tank, 2);
-        } else if (sf::Keyboard::isKeyPressed(tank.Keys.get_left())) {
+        } else if (sf::Keyboard::isKeyPressed(tank.get_left())) {
             move_entity(tank, 3);
         }
-        if (sf::Keyboard::isKeyPressed(tank.Keys.get_launch())) {
+        if (sf::Keyboard::isKeyPressed(tank.get_launch())) {
             launch_missile(tank);
         }
 

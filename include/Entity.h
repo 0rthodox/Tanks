@@ -62,9 +62,10 @@ class tank : public Entity {
     sf::Time main_cooldown_;
     sf::Time time_of_last_launch_;
     short health_;
+    Keys keys;
 
 public:
-    keys Keys;
+
 
 //CD-tors:
     tank(const unsigned short & = 0, const sf::Vector2f & = sf::Vector2f(),
@@ -77,8 +78,20 @@ public:
     void set_keys(const sf::Keyboard::Key & = sf::Keyboard::Unknown, const sf::Keyboard::Key & = sf::Keyboard::Unknown,
                   const sf::Keyboard::Key & = sf::Keyboard::Unknown, const sf::Keyboard::Key & = sf::Keyboard::Unknown,
                   const sf::Keyboard::Key & = sf::Keyboard::Unknown, const sf::Keyboard::Key & = sf::Keyboard::Unknown);
+    void set_up(const sf::Keyboard::Key &);
+    void set_left(const sf::Keyboard::Key &);
+    void set_down(const sf::Keyboard::Key &);
+    void set_right(const sf::Keyboard::Key &);
+    void set_launch(const sf::Keyboard::Key &);
+    void set_shoot(const sf::Keyboard::Key &);
 
 //Getters:
+    sf::Keyboard::Key get_up() const;
+    sf::Keyboard::Key get_left() const;
+    sf::Keyboard::Key get_down() const;
+    sf::Keyboard::Key get_right() const;
+    sf::Keyboard::Key get_launch() const;
+    sf::Keyboard::Key get_shoot() const;
     sf::Time get_main_cooldown() const;
     sf::Time get_time_of_last_launch() const;
     short get_health() const;

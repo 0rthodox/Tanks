@@ -130,5 +130,59 @@ bool Entity::intersects(const Entity & E) {
 
 void tank::set_keys(const sf::Keyboard::Key & up, const sf::Keyboard::Key & left, const sf::Keyboard::Key & down,
                     const sf::Keyboard::Key & right, const sf::Keyboard::Key & launch, const sf::Keyboard::Key & shoot) {
-    Keys = keys(up, left, down, right, launch, shoot);
+    set_up(up);
+    set_left(left);
+    set_down(down);
+    set_right(right);
+    set_launch(launch);
+    set_shoot(shoot);
+}
+
+void tank::set_up(const sf::Keyboard::Key & new_key) {
+    keys.Up_ = new_key;
+}
+
+void tank::set_left(const sf::Keyboard::Key & new_key) {
+    keys.Left_ = new_key;
+}
+
+void tank::set_down(const sf::Keyboard::Key & new_key) {
+    keys.Down_ = new_key;
+}
+
+void tank::set_right(const sf::Keyboard::Key & new_key) {
+    keys.Right_ = new_key;
+}
+
+void tank::set_launch(const sf::Keyboard::Key & new_key) {
+    keys.Launch_ = new_key;
+}
+
+void tank::set_shoot(const sf::Keyboard::Key & new_key) {
+    keys.Shoot_ = new_key;
+}
+
+
+sf::Keyboard::Key tank::get_up() const {
+    return keys.Up_;
+}
+
+sf::Keyboard::Key tank::get_left() const {
+    return keys.Left_;
+}
+
+sf::Keyboard::Key tank::get_down() const {
+    return keys.Down_;
+}
+
+sf::Keyboard::Key tank::get_right() const {
+    return keys.Right_;
+}
+
+sf::Keyboard::Key tank::get_launch() const {
+    return keys.Launch_;
+}
+
+sf::Keyboard::Key tank::get_shoot() const {
+    return keys.Shoot_;
 }
