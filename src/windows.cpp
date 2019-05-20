@@ -69,7 +69,7 @@ bool main_window::work() {
 
             handle_projectiles();
 
-            if(check_hits())
+            if(!tanks_are_alive())
                 break;
 
             draw();
@@ -183,29 +183,17 @@ void main_window::handle_projectiles() {
         if((it->get_position().x == 0 && it->get_direction() == 3) || (it->get_position().x == 15 * scale && it->get_direction() == 1)
            || (it->get_position().y == 0 && it->get_direction() == 0) || (it->get_position().y == 8 * scale && it->get_direction() == 2))
             it = projectiles.erase(it);
-    }
 
-}
+        for(auto & tank : tanks) {
 
-bool main_window::check_hit(const tank & t) {
-    sf::FloatRect tank_bounds = const_cast<tank &>(t).get_sprite().getGlobalBounds();
-    for(auto & prj : projectiles) {
-        if(prj.get_sprite().getGlobalBounds().intersects(tank_bounds))
-            return true;
-    }
-    return false;
-}
-
-bool main_window::check_hits() {
-    bool res = false;
-    for(size_t i = 0; i < tanks.size(); ++i) {
-
-        if (check_hit(tanks[i])) {
-            std::cout << "Tank " << i << " was hit" << std::endl;
-            res = true;
+            if(tank.intersects(*it)) {
+                tank.be_hit(it->get_damage());
+                it = projectiles.erase(it);
+                break;
+            }
         }
     }
-    return res;
+
 }
 
 void main_window::launch_missile(tank & t) {
@@ -216,4 +204,12 @@ void main_window::launch_missile(tank & t) {
                                          t.get_position() + sf::Vector2f(scale * ((t.get_direction() == 1) - (t.get_direction() == 3)),
                                                                                             scale * ((t.get_direction() == 2) - (t.get_direction() == 0)))));
     }
+}
+
+bool main_window::tanks_are_alive() {
+    for(const auto & tank : tanks) {
+        if(tank.get_health() <= 0)
+            return false;
+    }
+    return true;
 }

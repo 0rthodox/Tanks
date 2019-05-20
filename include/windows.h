@@ -65,6 +65,8 @@ class main_window : public wind {
 
     void launch_missile(tank &);
 
+    bool tanks_are_alive();
+
 public:
 
     main_window();

@@ -36,7 +36,7 @@ void Entity::adjust_provider(texture_keeper * keeper, unsigned short number) {
 
 }
 
-const sf::Sprite Entity::get_sprite() {
+sf::Sprite Entity::get_sprite() const {
 
     return spr_;
 
@@ -53,11 +53,11 @@ void Entity::set_sprite(const float & w, const float & h) {
 
 }
 
-const unsigned short Entity::get_direction() {
+unsigned short Entity::get_direction() const {
     return direction_;
 }
 
-const unsigned short Entity::get_speed() {
+unsigned short Entity::get_speed() const {
     return speed_;
 }
 
@@ -69,13 +69,14 @@ void Entity::set_position(const sf::Vector2f & new_position) {
     spr_.setPosition(new_position);
 }
 
-const sf::Vector2f Entity::get_position() {
+sf::Vector2f Entity::get_position() const {
     return spr_.getPosition();
 }
 
 tank::tank(const unsigned short & direction, const sf::Vector2f & position,
          const unsigned short & speed, const float & w, const float & h) :
         Entity(1, w, h, direction, speed, position) {
+            set_health(100);
             set_main_cooldown(sf::seconds(1.f));
             set_time_of_last_launch(sf::seconds(-1.f));
         }
@@ -102,4 +103,27 @@ void tank::set_health(const short & new_health) {
 
 short tank::get_health() const {
     return health_;
+}
+
+void tank::be_hit(const short & damage) {
+    health_ -= damage;
+}
+
+void projectile::set_damage(const short & new_damage) {
+    damage_ = new_damage;
+}
+
+short projectile::get_damage() const  {
+    return damage_;
+}
+
+projectile::projectile(const unsigned short & direction, const sf::Vector2f & position,
+               const unsigned short & speed, const float & w, const float & h) :
+       Entity(2, w, h, direction, speed, position) {
+    set_damage(50);
+    }
+
+
+bool Entity::intersects(const Entity & E) {
+    return get_sprite().getGlobalBounds().intersects(E.get_sprite().getGlobalBounds());
 }
