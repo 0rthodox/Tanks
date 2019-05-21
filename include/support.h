@@ -28,7 +28,7 @@ class texture_manager {
     unsigned short number_;
 
 public:
-//Keys
+//CDtors
     texture_manager() {}
     texture_manager(texture_keeper *, unsigned short);
 //Setters:
@@ -47,4 +47,18 @@ struct Keys {
     sf::Keyboard::Key Launch_;
     sf::Keyboard::Key Shoot_;
 };
+
+class effect {
+    sf::Time cooldown_;
+    sf::Time last_cast_;
+
+public:
+//CDtors
+    virtual ~effect() = default;
+//Other
+    virtual void cast() = 0;
+    virtual void purify() = 0;
+    void check(const sf::Time &);
+};
+
 #endif // SUPPORT_H

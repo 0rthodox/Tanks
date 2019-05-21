@@ -62,6 +62,7 @@ class tank : public Entity {
     sf::Time main_cooldown_;
     sf::Time time_of_last_launch_;
     short health_;
+    short max_health_;
     Keys keys;
 
 public:
@@ -75,6 +76,7 @@ public:
     void set_main_cooldown(const sf::Time &);
     void set_time_of_last_launch(const sf::Time &);
     void set_health(const short &);
+    void set_max_health(const short &);
     void set_keys(const sf::Keyboard::Key & = sf::Keyboard::Unknown, const sf::Keyboard::Key & = sf::Keyboard::Unknown,
                   const sf::Keyboard::Key & = sf::Keyboard::Unknown, const sf::Keyboard::Key & = sf::Keyboard::Unknown,
                   const sf::Keyboard::Key & = sf::Keyboard::Unknown, const sf::Keyboard::Key & = sf::Keyboard::Unknown);
@@ -95,9 +97,12 @@ public:
     sf::Time get_main_cooldown() const;
     sf::Time get_time_of_last_launch() const;
     short get_health() const;
+    short get_max_health() const;
 
 //Other:
+    void color(const sf::Color &);
     void be_hit(const short &);
+    void lose_bricks();
 };
 
 #endif // ENTITY_H

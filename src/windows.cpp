@@ -52,9 +52,11 @@ main_window::main_window() : clock() {
     tanks.push_back(tank(1, sf::Vector2f()));
     tanks[0].set_keys(sf::Keyboard::W, sf::Keyboard::A, sf::Keyboard::S,
                       sf::Keyboard::D, sf::Keyboard::E, sf::Keyboard::Q);
+    tanks[0].color(sf::Color(71, 167, 106));
     tanks.push_back(tank(3, sf::Vector2f(15 * scale, 8 * scale)));
     tanks[1].set_keys(sf::Keyboard::Numpad8, sf::Keyboard::Numpad4, sf::Keyboard::Numpad5,
                       sf::Keyboard::Numpad6, sf::Keyboard::Numpad9, sf::Keyboard::Numpad7);
+    tanks[1].color(sf::Color(62, 95, 138));
 
 }
 
@@ -183,6 +185,8 @@ void main_window::handle_projectiles() {
 
             if(tank.intersects(*it)) {
                 tank.be_hit(it->get_damage());
+                if(static_cast<float>(tank.get_health()) <= 0.5 * static_cast<float>(tank.get_max_health()))
+                    tank.lose_bricks();
                 it = projectiles.erase(it);
                 break;
             }

@@ -50,3 +50,8 @@ sf::Vector2f check_bounds(const sf::Vector2f & position , const short & xlim, co
     return sf::Vector2f(dx, dy);
 
 }
+
+void effect::check(const sf::Time & curr_time) {
+    if(curr_time - last_cast_ >= cooldown_)
+        purify();
+}

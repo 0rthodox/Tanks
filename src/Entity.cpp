@@ -19,7 +19,9 @@ void Entity::set_direction(const unsigned short & new_direction) {
 
     direction_ = new_direction;
 
-    spr_.setTextureRect(sf::IntRect(w_ * direction_, 0, w_, h_));
+    float old_Y_position = spr_.getTextureRect().top;
+
+    spr_.setTextureRect(sf::IntRect(w_ * direction_, old_Y_position, w_, h_));
 
 }
 
@@ -76,7 +78,8 @@ sf::Vector2f Entity::get_position() const {
 tank::tank(const unsigned short & direction, const sf::Vector2f & position,
          const unsigned short & speed, const float & w, const float & h) :
         Entity(1, w, h, direction, speed, position) {
-            set_health(100);
+            set_max_health(100);
+            set_health(max_health_);
             set_main_cooldown(sf::seconds(1.f));
             set_time_of_last_launch(sf::seconds(-1.f));
         }
@@ -103,6 +106,14 @@ void tank::set_health(const short & new_health) {
 
 short tank::get_health() const {
     return health_;
+}
+
+void tank::set_max_health(const short & new_health) {
+    max_health_ = new_health;
+}
+
+short tank::get_max_health() const {
+    return max_health_;
 }
 
 void tank::be_hit(const short & damage) {
@@ -185,4 +196,14 @@ sf::Keyboard::Key tank::get_launch() const {
 
 sf::Keyboard::Key tank::get_shoot() const {
     return keys.Shoot_;
+}
+
+void tank::color(const sf::Color & new_color) {
+    spr_.setColor(new_color);
+}
+
+void tank::lose_bricks() {
+    auto old_rect = spr_.getTextureRect();
+    old_rect.top += 5;
+    spr_.setTextureRect(old_rect);
 }
