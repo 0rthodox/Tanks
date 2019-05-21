@@ -5,6 +5,8 @@
 
 extern int rate;
 
+extern font F;
+
 class wind {
 
 protected:
@@ -22,6 +24,7 @@ class init_window : public wind {
 
     texture_manager provider_;
     sf::Sprite main_sprite_;
+    inscription main_inscription_;
 
 public:
 

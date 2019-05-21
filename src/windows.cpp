@@ -26,20 +26,29 @@ bool init_window::work() {
 
             wind_.draw(main_sprite_);
 
+            if(main_sprite_.getColor().a > 128) {
+                sf::Color new_color = main_sprite_.getColor();
+                new_color.a -= 3;
+                main_sprite_.setColor(new_color);
+            } else {
+                wind_.draw(main_inscription_.get());
+                main_inscription_.flicker(240, 255, 1);
+            }
+
             wind_.display();
         }
 
         return false;
 }
 
-init_window::init_window() : provider_(&T, 0) {
+init_window::init_window() : provider_(&T, 0), main_inscription_("START", sf::Vector2f(16 / 2 * scale, 9 / 2 * scale), sf::Color(250, 167, 108)) {
 
     main_sprite_.setTexture(provider_.get_texture());
     main_sprite_.setScale(1 / 120., 1 / 120.);
 
 }
 
-main_window::main_window() : clock() {
+main_window::main_window() {
 
     map_.resize(9);
     for(auto & str : map_)

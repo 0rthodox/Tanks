@@ -9,7 +9,6 @@ void texture_manager::set_number(unsigned short number) {
 }
 
 texture_manager::texture_manager(texture_keeper * data, unsigned short number) {
-    std::cout << "Initializing texture manager" << std::endl;
     set_data(data);
     set_number(number);
 }
@@ -29,8 +28,6 @@ texture_keeper::texture_keeper(int k) {
         T.loadFromImage(I);
         data_.push_back(T);
     }
-    std::cout << data_.size();
-
 }
 
 sf::Vector2f check_bounds(const sf::Vector2f & position , const short & xlim, const short & ylim) {
@@ -54,4 +51,79 @@ sf::Vector2f check_bounds(const sf::Vector2f & position , const short & xlim, co
 void effect::check(const sf::Time & curr_time) {
     if(curr_time - last_cast_ >= cooldown_)
         purify();
+}
+
+
+//Class font
+
+
+font::font() {
+    if(!font_.loadFromFile("fonts/ARLRDBD.ttf"))
+        std::cout << "Failed";
+}
+
+const sf::Font & font::get_font() {
+    return font_;
+}
+
+
+//Class textblock
+
+
+textblock::textblock(const sf::Vector2f & new_position, const std::string & to_display, const sf::Color & background_color) {
+    text_.setFillColor(sf::Color(250, 167, 108));
+    text_.setFont(F.get_font());
+    text_.setCharacterSize(2 * scale);
+    set_string(to_display);
+    background_.setSize(sf::Vector2f(text_.getGlobalBounds().width, text_.getGlobalBounds().height));
+    background_.setFillColor(background_color);
+    set_position(new_position);
+}
+
+void textblock::set_string(const std::string & to_display) {
+    text_.setString(to_display);
+}
+
+
+void textblock::set_position(const sf::Vector2f & new_position) {
+    text_.setPosition(new_position - sf::Vector2f(text_.getGlobalBounds().width / 2, text_.getGlobalBounds().height / 2));
+    //background_.setPosition(new_position - sf::Vector2f(text_.getGlobalBounds().width / 2, text_.getGlobalBounds().height / 2));
+}
+
+std::pair<sf::RectangleShape, sf::Text> textblock::get() {
+    return std::make_pair(background_, text_);
+
+}
+
+
+//Inscription
+
+inscription::inscription(const std::string & inscr, const sf::Vector2f & new_position, const sf::Color & new_color) : text_(inscr, F.get_font(), 2 * scale) {
+    set_position(new_position);
+    set_color(new_color);
+    text_.setStyle(sf::Text::Regular);
+}
+
+void inscription::set_position(const sf::Vector2f & new_position) {
+    text_.setPosition(new_position - sf::Vector2f(text_.getGlobalBounds().width / 2, text_.getGlobalBounds().height / 2));
+}
+
+sf::Text inscription::get() const {
+    return text_;
+}
+
+void inscription::set_color(const sf::Color & new_color) {
+    text_.setFillColor(new_color);
+}
+
+void inscription::flicker(const sf::Uint32 & smallest, const sf::Uint32 & biggest, const sf::Uint32 & delta) {
+    if(smallest >= 0 && biggest < 256) {
+        sf::Color new_color = text_.getColor();
+        if(text_.getColor().a > smallest) {
+            new_color.a -= delta;
+        } else {
+            new_color.a = biggest;
+        }
+        text_.setColor(new_color);
+    }
 }

@@ -6,6 +6,8 @@ int rate = 30;
 
 texture_keeper T(3);
 
+font F;
+
 int main() {
 
     init_window iw;
