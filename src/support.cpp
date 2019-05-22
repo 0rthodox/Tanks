@@ -67,35 +67,6 @@ const sf::Font & font::get_font() {
 }
 
 
-//Class textblock
-
-
-textblock::textblock(const sf::Vector2f & new_position, const std::string & to_display, const sf::Color & background_color) {
-    text_.setFillColor(sf::Color(250, 167, 108));
-    text_.setFont(F.get_font());
-    text_.setCharacterSize(2 * scale);
-    set_string(to_display);
-    background_.setSize(sf::Vector2f(text_.getGlobalBounds().width, text_.getGlobalBounds().height));
-    background_.setFillColor(background_color);
-    set_position(new_position);
-}
-
-void textblock::set_string(const std::string & to_display) {
-    text_.setString(to_display);
-}
-
-
-void textblock::set_position(const sf::Vector2f & new_position) {
-    text_.setPosition(new_position - sf::Vector2f(text_.getGlobalBounds().width / 2, text_.getGlobalBounds().height / 2));
-    //background_.setPosition(new_position - sf::Vector2f(text_.getGlobalBounds().width / 2, text_.getGlobalBounds().height / 2));
-}
-
-std::pair<sf::RectangleShape, sf::Text> textblock::get() {
-    return std::make_pair(background_, text_);
-
-}
-
-
 //Inscription
 
 inscription::inscription(const std::string & inscr, const sf::Vector2f & new_position, const sf::Color & new_color) : text_(inscr, F.get_font(), 2 * scale) {
@@ -118,12 +89,12 @@ void inscription::set_color(const sf::Color & new_color) {
 
 void inscription::flicker(const sf::Uint32 & smallest, const sf::Uint32 & biggest, const sf::Uint32 & delta) {
     if(smallest >= 0 && biggest < 256) {
-        sf::Color new_color = text_.getColor();
-        if(text_.getColor().a > smallest) {
+        sf::Color new_color = text_.getFillColor();
+        if(text_.getFillColor().a > smallest) {
             new_color.a -= delta;
         } else {
             new_color.a = biggest;
         }
-        text_.setColor(new_color);
+        text_.setFillColor(new_color);
     }
 }

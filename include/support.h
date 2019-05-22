@@ -86,20 +86,6 @@ public:
 
 extern font F;
 
-
-//Textblock
-
-
-class textblock {
-    sf::RectangleShape background_;
-    sf::Text text_;
-public:
-    textblock(const sf::Vector2f &, const std::string & = "", const sf::Color & = sf::Color());
-    void set_string(const std::string &);
-    void set_position(const sf::Vector2f &);
-    std::pair<sf::RectangleShape, sf::Text> get();
-};
-
 //Text
 
 class inscription {

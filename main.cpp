@@ -10,7 +10,7 @@ font F;
 
 int main() {
 
-    init_window iw;
+    init_window iw("START");
     main_window mw;
     if(iw.work())
         mw.work();

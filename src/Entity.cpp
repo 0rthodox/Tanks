@@ -1,5 +1,9 @@
 #include "Entity.h"
 
+
+//Entity: CDtors
+
+
 Entity::Entity() {}
 
 Entity::Entity(const unsigned short & texture_number, const float & w, const float & h, const unsigned short & direction, const unsigned short & speed, const sf::Vector2f & position) {
@@ -14,6 +18,8 @@ Entity::Entity(const unsigned short & texture_number, const float & w, const flo
 
     set_position(position);
 }
+
+//Entity: Setters
 
 void Entity::set_direction(const unsigned short & new_direction) {
 
@@ -38,12 +44,6 @@ void Entity::adjust_provider(texture_keeper * keeper, unsigned short number) {
 
 }
 
-sf::Sprite Entity::get_sprite() const {
-
-    return spr_;
-
-}
-
 void Entity::set_sprite(const float & w, const float & h) {
 
     spr_.setTexture(provider_.get_texture());
@@ -55,14 +55,6 @@ void Entity::set_sprite(const float & w, const float & h) {
 
 }
 
-unsigned short Entity::get_direction() const {
-    return direction_;
-}
-
-unsigned short Entity::get_speed() const {
-    return speed_;
-}
-
 void Entity::set_position(const float & x, const float & y) {
     spr_.setPosition(x, y);
 }
@@ -71,9 +63,36 @@ void Entity::set_position(const sf::Vector2f & new_position) {
     spr_.setPosition(new_position);
 }
 
+//Entity: Getters
+
+sf::Sprite Entity::get_sprite() const {
+
+    return spr_;
+
+}
+
+unsigned short Entity::get_direction() const {
+    return direction_;
+}
+
+unsigned short Entity::get_speed() const {
+    return speed_;
+}
+
+
 sf::Vector2f Entity::get_position() const {
     return spr_.getPosition();
 }
+
+//Entity:Others
+
+bool Entity::intersects(const Entity & E) {
+    return get_sprite().getGlobalBounds().intersects(E.get_sprite().getGlobalBounds());
+}
+
+
+//Tank: CDtors
+
 
 tank::tank(const unsigned short & direction, const sf::Vector2f & position,
          const unsigned short & speed, const float & w, const float & h) :
@@ -84,6 +103,10 @@ tank::tank(const unsigned short & direction, const sf::Vector2f & position,
             set_time_of_last_launch(sf::seconds(-1.f));
         }
 
+
+//Tank: Setters
+
+
 void tank::set_main_cooldown(const sf::Time & new_cooldown) {
     main_cooldown_ = new_cooldown;
 }
@@ -92,51 +115,16 @@ void tank::set_time_of_last_launch(const sf::Time & new_time) {
     time_of_last_launch_ = new_time;
 }
 
-sf::Time tank::get_main_cooldown() const {
-    return main_cooldown_;
-}
-
-sf::Time tank::get_time_of_last_launch() const {
-    return time_of_last_launch_;
-}
-
 void tank::set_health(const short & new_health) {
     health_ = new_health;
-}
-
-short tank::get_health() const {
-    return health_;
 }
 
 void tank::set_max_health(const short & new_health) {
     max_health_ = new_health;
 }
 
-short tank::get_max_health() const {
-    return max_health_;
-}
-
-void tank::be_hit(const short & damage) {
-    health_ -= damage;
-}
-
 void projectile::set_damage(const short & new_damage) {
     damage_ = new_damage;
-}
-
-short projectile::get_damage() const  {
-    return damage_;
-}
-
-projectile::projectile(const unsigned short & direction, const sf::Vector2f & position,
-               const unsigned short & speed, const float & w, const float & h) :
-       Entity(2, w, h, direction, speed, position) {
-    set_damage(50);
-    }
-
-
-bool Entity::intersects(const Entity & E) {
-    return get_sprite().getGlobalBounds().intersects(E.get_sprite().getGlobalBounds());
 }
 
 void tank::set_keys(const sf::Keyboard::Key & up, const sf::Keyboard::Key & left, const sf::Keyboard::Key & down,
@@ -173,6 +161,27 @@ void tank::set_shoot(const sf::Keyboard::Key & new_key) {
     keys.Shoot_ = new_key;
 }
 
+void tank::color(const sf::Color & new_color) {
+    spr_.setColor(new_color);
+}
+
+//Tank: Getters
+
+sf::Time tank::get_main_cooldown() const {
+    return main_cooldown_;
+}
+
+sf::Time tank::get_time_of_last_launch() const {
+    return time_of_last_launch_;
+}
+
+short tank::get_health() const {
+    return health_;
+}
+
+short tank::get_max_health() const {
+    return max_health_;
+}
 
 sf::Keyboard::Key tank::get_up() const {
     return keys.Up_;
@@ -198,12 +207,29 @@ sf::Keyboard::Key tank::get_shoot() const {
     return keys.Shoot_;
 }
 
-void tank::color(const sf::Color & new_color) {
-    spr_.setColor(new_color);
+//Tank: Other
+
+void tank::be_hit(const short & damage) {
+    health_ -= damage;
 }
 
 void tank::lose_bricks() {
     auto old_rect = spr_.getTextureRect();
     old_rect.top += 5;
     spr_.setTextureRect(old_rect);
+}
+
+//Projectile:CDtors
+
+projectile::projectile(const unsigned short & direction, const sf::Vector2f & position,
+               const unsigned short & speed, const float & w, const float & h) :
+       Entity(2, w, h, direction, speed, position) {
+    set_damage(50);
+    }
+
+//Projectile:Getters
+
+
+short projectile::get_damage() const  {
+    return damage_;
 }

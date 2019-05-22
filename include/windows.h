@@ -7,6 +7,10 @@ extern int rate;
 
 extern font F;
 
+
+//Wind:
+
+
 class wind {
 
 protected:
@@ -20,6 +24,10 @@ public:
 
 };
 
+
+//Init:
+
+
 class init_window : public wind {
 
     texture_manager provider_;
@@ -28,13 +36,15 @@ class init_window : public wind {
 
 public:
 
-    init_window();
+    init_window(const std::string &);
 
     bool work();
 
 };
 
 class main_window : public wind {
+
+    inscription final_inscription_;
 
     std::vector<std::vector<bool>> map_;
 

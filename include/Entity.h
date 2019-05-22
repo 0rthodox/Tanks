@@ -7,6 +7,10 @@ extern int scale;
 extern texture_keeper T;
 class  main_window;
 
+
+//Entity:
+
+
 class Entity {
     friend main_window;
 
@@ -56,6 +60,10 @@ public:
 
 
 };
+
+
+//Tank:
+
 
 class tank : public Entity {
 

@@ -41,7 +41,7 @@ bool init_window::work() {
         return false;
 }
 
-init_window::init_window() : provider_(&T, 0), main_inscription_("START", sf::Vector2f(16 / 2 * scale, 9 / 2 * scale), sf::Color(250, 167, 108)) {
+init_window::init_window(const std::string & inscr) : provider_(&T, 0), main_inscription_(inscr, sf::Vector2f(16 / 2 * scale, 9 / 2 * scale), sf::Color(250, 167, 108)) {
 
     main_sprite_.setTexture(provider_.get_texture());
     main_sprite_.setScale(1 / 120., 1 / 120.);
