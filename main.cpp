@@ -8,7 +8,6 @@ texture_keeper T(3);
 font F;
 
 int main() {
-
     gameloop();
     return 0;
 }

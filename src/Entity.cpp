@@ -87,14 +87,14 @@ sf::Vector2f Entity::get_position() const {
     return spr_.getPosition();
 }
 
-//Entity:Others
+//Entity:Other
 
 bool Entity::intersects(const Entity & E) {
     return get_sprite().getGlobalBounds().intersects(E.get_sprite().getGlobalBounds());
 }
 
 
-//Tank: CDtors
+//Tank: CD-tors
 
 
 tank::tank(const unsigned short & direction, const sf::Vector2f & position,

@@ -119,10 +119,7 @@ void main_window::handle_event() {
     while(wind_.pollEvent(event)) {
         if(event.type == sf::Event::Closed) {
             wind_.close();
-        } else if(event.type == sf::Event::MouseButtonPressed) {
-
         }
-
     }
 }
 

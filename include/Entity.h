@@ -67,7 +67,6 @@ public:
 
 
 class tank : public Entity {
-
     sf::Time main_cooldown_;
     sf::Time time_of_last_launch_;
     short health_;
@@ -75,8 +74,6 @@ class tank : public Entity {
     Keys keys;
 
 public:
-
-
 //CD-tors:
     tank(const unsigned short & = 0, const sf::Vector2f & = sf::Vector2f(),
          const unsigned short & = 120, const float & = 5, const float & = 5);
@@ -114,15 +111,25 @@ public:
     void lose_bricks();
 };
 
+
+//Point:
+
+
 class point {
     sf::CircleShape circle_;
     float condition_;
+
 public:
+//CD-tors:
     point();
-    void be_captured(tank &, const float &, const float &);
-    bool is_captured();
+
+//Getters:
     float check_condition() const;
     sf::CircleShape get_circle();
+
+//Other:
+    void be_captured(tank &, const float &, const float &);
+    bool is_captured();
 };
 
 #endif // ENTITY_H
