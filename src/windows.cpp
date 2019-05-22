@@ -63,8 +63,14 @@ main_window::main_window() {
     for(auto & str : map_)
         str.assign(16, false);
     map_[2][2] = true;
+    map_[3][3] = true;
+    map_[4][4] = true;
+    map_[5][3] = true;
     map_[6][2] = true;
     map_[2][13] = true;
+    map_[3][12] = true;
+    map_[4][11] = true;
+    map_[5][12] = true;
     map_[6][13] = true;
 
     tanks.push_back(tank(1, sf::Vector2f()));
@@ -93,7 +99,9 @@ std::string main_window::work() {
 
             handle_projectiles();
 
-            if(!tanks_are_alive())
+            handle_point();
+
+            if(!tanks_are_alive() || P.is_captured())
                 return final_message();
 
             draw();
@@ -151,6 +159,8 @@ void main_window::draw() {
                 elem.setFillColor(sf::Color::Cyan);
             wind_.draw(elem);
         }
+
+    wind_.draw(P.get_circle());
 
     for(auto & tank : tanks) {
         wind_.draw(tank.get_sprite());
@@ -213,6 +223,12 @@ void main_window::handle_projectiles() {
 
 }
 
+void main_window::handle_point() {
+    for(unsigned i = 0; i < tanks.size(); ++i) {
+        P.be_captured(tanks[i], i, time / 10);
+    }
+}
+
 void main_window::launch_missile(tank & t) {
     sf::Time current_time = const_clock.getElapsedTime();
     if(current_time - t.get_time_of_last_launch() >= t.get_main_cooldown()) {
@@ -232,10 +248,9 @@ bool main_window::tanks_are_alive() {
 }
 
 std::string main_window::final_message() {
-    if(tanks[0].get_health() <= 0)
+    if(tanks[0].get_health() <= 0 || P.check_condition() >= 1)
         return "BLUE WON";
-    else
-        return "GREEN WON";
+    return "GREEN WON";
 }
 
 //Gamelooop:
@@ -244,6 +259,10 @@ void gameloop() {
     init_window iw("START");
     while(iw.work()) {
         main_window mw;
-        iw.set_message(mw.work());
+        auto message = mw.work();
+        if(message != "")
+            iw.set_message(message);
+        else
+            iw.set_message("CLOSE TO EXIT");
     }
 }

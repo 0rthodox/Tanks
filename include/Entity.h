@@ -35,6 +35,7 @@ public:
     unsigned short get_speed() const;
     unsigned short get_direction() const;
     sf::Vector2f get_position() const;
+    sf::FloatRect get_bounds() const;
 
 //Other:
     bool intersects(const Entity &);
@@ -111,6 +112,17 @@ public:
     void color(const sf::Color &);
     void be_hit(const short &);
     void lose_bricks();
+};
+
+class point {
+    sf::CircleShape circle_;
+    float condition_;
+public:
+    point();
+    void be_captured(tank &, const float &, const float &);
+    bool is_captured();
+    float check_condition() const;
+    sf::CircleShape get_circle();
 };
 
 #endif // ENTITY_H

@@ -79,6 +79,9 @@ unsigned short Entity::get_speed() const {
     return speed_;
 }
 
+sf::FloatRect Entity::get_bounds() const {
+    return spr_.getGlobalBounds();
+}
 
 sf::Vector2f Entity::get_position() const {
     return spr_.getPosition();
@@ -215,8 +218,10 @@ void tank::be_hit(const short & damage) {
 
 void tank::lose_bricks() {
     auto old_rect = spr_.getTextureRect();
-    old_rect.top += 5;
-    spr_.setTextureRect(old_rect);
+    if(old_rect.top == 0) {
+        old_rect.top += 5;
+        spr_.setTextureRect(old_rect);
+    }
 }
 
 //Projectile:CDtors
@@ -224,7 +229,7 @@ void tank::lose_bricks() {
 projectile::projectile(const unsigned short & direction, const sf::Vector2f & position,
                const unsigned short & speed, const float & w, const float & h) :
        Entity(2, w, h, direction, speed, position) {
-    set_damage(50);
+    set_damage(25);
     }
 
 //Projectile:Getters
@@ -232,4 +237,46 @@ projectile::projectile(const unsigned short & direction, const sf::Vector2f & po
 
 short projectile::get_damage() const  {
     return damage_;
+}
+
+//Point:
+
+point::point() {
+    condition_ = 0.5;
+    circle_.setFillColor(sf::Color::White);
+    circle_.setRadius(scale);
+    circle_.setPosition(sf::Vector2f((X - 2) * scale / 2, (Y - 2) * scale / 2));
+    circle_.setOutlineThickness(5.f);
+}
+
+void point::be_captured(tank & t, const float & num, const float & delta) {
+    if(circle_.getGlobalBounds().intersects(t.get_bounds())) {
+        if(num)
+            condition_ += delta;
+        else
+            condition_ -= delta;
+        if(condition_ < 0.5) {
+            if(condition_ < 0.25)
+                circle_.setOutlineColor(sf::Color(30, 89, 69));
+            else
+                circle_.setOutlineColor(sf::Color(137, 172, 118));
+        } else if (condition_ > 0.5) {
+            if(condition_ > 0.75)
+                circle_.setOutlineColor(sf::Color(0, 47, 85));
+            else
+                circle_.setOutlineColor(sf::Color(96, 110, 140));
+        }
+    }
+}
+
+float point::check_condition() const {
+    return condition_;
+}
+
+sf::CircleShape point::get_circle() {
+    return circle_;
+}
+
+bool point::is_captured() {
+    return (condition_ <= 0 || condition_ >= 1);
 }

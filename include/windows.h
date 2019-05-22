@@ -52,6 +52,8 @@ class main_window : public wind {
 
     std::list<projectile> projectiles;
 
+    point P;
+
     sf::Clock clock;
 
     sf::Clock const_clock;
@@ -81,6 +83,8 @@ class main_window : public wind {
     bool tanks_are_alive();
 
     std::string final_message();
+
+    void handle_point();
 
 public:
 
