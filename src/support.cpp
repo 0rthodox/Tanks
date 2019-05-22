@@ -87,6 +87,10 @@ void inscription::set_color(const sf::Color & new_color) {
     text_.setFillColor(new_color);
 }
 
+void inscription::set_text(const std::string & new_text) {
+    text_.setString(new_text);
+}
+
 void inscription::flicker(const sf::Uint32 & smallest, const sf::Uint32 & biggest, const sf::Uint32 & delta) {
     if(smallest >= 0 && biggest < 256) {
         sf::Color new_color = text_.getFillColor();

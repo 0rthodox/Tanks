@@ -2,9 +2,14 @@
 
 wind::wind() {}
 
+//Init Window:
+
 bool init_window::work() {
 
-        wind_.create(sf::VideoMode(16 * scale, 9 * scale), "TANKS");
+        main_sprite_.setTexture(provider_.get_texture());
+        main_sprite_.setScale(1 / 120., 1 / 120.);
+
+        wind_.create(sf::VideoMode(X * scale, Y * scale), "TANKS");
 
         main_sprite_.scale(scale, scale);
 
@@ -41,12 +46,16 @@ bool init_window::work() {
         return false;
 }
 
-init_window::init_window(const std::string & inscr) : provider_(&T, 0), main_inscription_(inscr, sf::Vector2f(16 / 2 * scale, 9 / 2 * scale), sf::Color(250, 167, 108)) {
+init_window::init_window(const std::string & inscr) :
+    provider_(&T, 0), main_inscription_(inscr, sf::Vector2f(X / 2 * scale, Y / 2 * scale), sf::Color(250, 167, 108)) {}
 
-    main_sprite_.setTexture(provider_.get_texture());
-    main_sprite_.setScale(1 / 120., 1 / 120.);
 
+void init_window::set_message(const std::string & new_message, const sf::Vector2f & new_position) {
+    main_inscription_.set_text(new_message);
+    main_inscription_.set_position(new_position);
 }
+
+//Main window:
 
 main_window::main_window() {
 
@@ -62,14 +71,14 @@ main_window::main_window() {
     tanks[0].set_keys(sf::Keyboard::W, sf::Keyboard::A, sf::Keyboard::S,
                       sf::Keyboard::D, sf::Keyboard::E, sf::Keyboard::Q);
     tanks[0].color(sf::Color(71, 167, 106));
-    tanks.push_back(tank(3, sf::Vector2f(15 * scale, 8 * scale)));
+    tanks.push_back(tank(3, sf::Vector2f((X - 1) * scale, (Y - 1) * scale)));
     tanks[1].set_keys(sf::Keyboard::Numpad8, sf::Keyboard::Numpad4, sf::Keyboard::Numpad5,
                       sf::Keyboard::Numpad6, sf::Keyboard::Numpad9, sf::Keyboard::Numpad7);
     tanks[1].color(sf::Color(62, 95, 138));
 
 }
 
-bool main_window::work() {
+std::string main_window::work() {
 
     wind_.create(sf::VideoMode(16 * scale, 9 * scale), "TANKS");
     wind_.setFramerateLimit(rate);
@@ -85,13 +94,13 @@ bool main_window::work() {
             handle_projectiles();
 
             if(!tanks_are_alive())
-                break;
+                return final_message();
 
             draw();
 
         }
 
-        return false;
+        return "";
 
 }
 
@@ -220,4 +229,21 @@ bool main_window::tanks_are_alive() {
             return false;
     }
     return true;
+}
+
+std::string main_window::final_message() {
+    if(tanks[0].get_health() <= 0)
+        return "BLUE WON";
+    else
+        return "GREEN WON";
+}
+
+//Gamelooop:
+
+void gameloop() {
+    init_window iw("START");
+    while(iw.work()) {
+        main_window mw;
+        iw.set_message(mw.work());
+    }
 }

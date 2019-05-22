@@ -4,7 +4,6 @@
 #include "Entity.h"
 
 extern int rate;
-
 extern font F;
 
 
@@ -20,7 +19,6 @@ protected:
 public:
 
     wind();
-    virtual bool work() = 0;
 
 };
 
@@ -39,6 +37,8 @@ public:
     init_window(const std::string &);
 
     bool work();
+
+    void set_message(const std::string &, const sf::Vector2f & = sf::Vector2f(X / 2 * scale, Y / 2 * scale));
 
 };
 
@@ -80,12 +80,16 @@ class main_window : public wind {
 
     bool tanks_are_alive();
 
+    std::string final_message();
+
 public:
 
     main_window();
 
-    bool work();
+    std::string work();
 
 };
+
+void gameloop();
 
 #endif // WINDOWS_H

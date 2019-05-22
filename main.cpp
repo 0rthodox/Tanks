@@ -1,20 +1,14 @@
 #include "windows.h"
 
+short X = 16;
+short Y = 9;
 int scale = 60;
-
 int rate = 30;
-
 texture_keeper T(3);
-
 font F;
 
 int main() {
 
-    init_window iw("START");
-    main_window mw;
-    if(iw.work())
-        mw.work();
-
+    gameloop();
     return 0;
-
 }

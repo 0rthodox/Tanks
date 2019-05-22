@@ -12,8 +12,10 @@
 class texture_manager;
 
 extern int scale;
+extern short X;
+extern short Y;
 
-sf::Vector2f check_bounds(const sf::Vector2f &, const short & = 16 , const short & = 9);
+sf::Vector2f check_bounds(const sf::Vector2f &, const short & = X , const short & = Y);
 
 
 //Texture Keeper
@@ -98,6 +100,7 @@ public:
 //Setters:
     void set_position(const sf::Vector2f & = sf::Vector2f());
     void set_color(const sf::Color & = sf::Color());
+    void set_text(const std::string & = "");
 
 //Getters:
     sf::Text get() const;

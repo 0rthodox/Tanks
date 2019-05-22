@@ -1,5 +1,5 @@
 # depslib dependency file v1.0
-1558460141 source:c:\dev\tanks\main.cpp
+1558508534 source:c:\dev\tanks\main.cpp
 	"windows.h"
 
 1557001419 c:\dev\tanks\windows.h
@@ -10,16 +10,16 @@
 1557002327 source:c:\dev\tanks\windows.cpp
 	"windows.h"
 
-1558504912 c:\dev\tanks\include\windows.h
+1558509370 c:\dev\tanks\include\windows.h
 	"Entity.h"
 
 1558504566 c:\dev\tanks\include\entity.h
 	"support.h"
 
-1558504356 source:c:\dev\tanks\src\windows.cpp
+1558509403 source:c:\dev\tanks\src\windows.cpp
 	"windows.h"
 
-1558504912 c:\dev\tanks\include\support.h
+1558509420 c:\dev\tanks\include\support.h
 	<string>
 	<vector>
 	<iostream>
@@ -30,6 +30,6 @@
 1558505694 source:c:\dev\tanks\src\entity.cpp
 	"Entity.h"
 
-1558504638 source:c:\dev\tanks\src\support.cpp
+1558508422 source:c:\dev\tanks\src\support.cpp
 	"support.h"
 
